@@ -7,7 +7,7 @@ type Button = {
     onClick?: () => void;
   };
   
-  export default function PrimaryButton({
+  export default function Button({
     children,
     bgColor = '#EDCD50',
     textColor = '#1E1E1E',
