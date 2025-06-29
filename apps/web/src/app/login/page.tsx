@@ -1,0 +1,137 @@
+'use client'
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Button from '../_components/Button';
+
+const Login = () => {
+  const Router = useRouter();
+  const [alamatEmail, setAlamatEmail] = useState('');
+  const [kataSandi, setKataSandi] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const handlePelajarSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!alamatEmail || !kataSandi) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    console.log('Masuk sebagai pelajar diklik');
+    Router.push('/user-dashboard');
+  };
+
+  const handleSupervisorSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!alamatEmail || !kataSandi) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    console.log('Masuk sebagai supervisor diklik');
+    Router.push('/supervisor-dashboard');
+  };
+
+  return (
+    <div className="h-screen flex">
+        <div className="flex-1 relative overflow-hidden">
+            <img
+            src="login-bgver2.png"
+            alt="Login Background"
+            className="w-full h-full object-cover"
+            />
+        </div>
+      <div className="flex-1 bg-white flex items-center justify-center p-8">
+        <div className="w-full max-w-md space-y-6">
+          <div className="text-center">
+            <h1 className="font-semibold text-3xl text-gray-800 mb-2">Masuk ke</h1>
+            <div className="flex justify-center -mt-10 -mb-3">
+              <img
+                src="logo.png"
+                alt="EduMinds Logo"
+                className="w-72 h-auto"
+              />
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Alamat Email
+              </label>
+              <input
+                type="email"
+                value={alamatEmail}
+                required
+                onChange={(e) => setAlamatEmail(e.target.value)}
+                placeholder="Masukkan alamat email..."
+                className={`w-full px-4 py-3 bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
+                  showError && !alamatEmail ? 'border-red-500' : 'border-gray-400'
+                }`}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Kata Sandi
+              </label>
+              <input
+                type="password"
+                value={kataSandi}
+                required
+                onChange={(e) => setKataSandi(e.target.value)}
+                placeholder="Masukkan kata sandi..."
+                className={`w-full px-4 py-3 bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
+                  showError && !kataSandi ? 'border-red-500' : 'border-gray-400'
+                }`}
+              />
+            </div>
+          </div>
+          {showError && (
+            <div className="text-red-500 text-sm mt-2">
+              Harap isi alamat email dan kata sandi dengan benar
+            </div>
+          )}
+          <div className="space-y-5 mt-12">
+            <form
+              onSubmit={handlePelajarSubmit}
+              className="space-y-5 mt-12"
+            >
+              <Button
+                type="submit"
+                bgColor="#EDCD50"
+                width="full"
+                fontWeight="font-medium"
+              >
+                Masuk sebagai Pelajar
+              </Button>
+            </form>
+            <form
+              onSubmit={handleSupervisorSubmit}
+            >
+              <Button
+                type="submit"
+                bgColor="#B3EBCE"
+                width="full"
+                fontWeight="font-medium"
+              >
+                Masuk sebagai Supervisor
+              </Button>
+            </form>
+          </div>
+          <div className="text-right">
+            <a
+              href="#"
+              className="text-[#1A1C7B] hover:text-[#5254A8] text-sm underline"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log('Lupa kata sandi diklik');
+              }}
+            >
+              Lupa kata sandi?
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
