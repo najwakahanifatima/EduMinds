@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
+  const activeNav = (prefix: string): string =>
+    pathname === prefix || pathname.startsWith(prefix + "/")
+      ? "rounded-full bg-[#EDCD50]/65 px-4 py-1 font-semibold text-gray-900"
+      : "button-navbar-off";
+  
   /* ── state dropdown ─────────────────────────── */
   const [openCareer, setOpenCareer] = useState(false);
   const [openPendamping, setOpenPendamping] = useState(false);
@@ -41,13 +47,13 @@ export default function Navbar() {
             <img src="/logo-cropped.png" alt="EduMinds" className="h-4 w-auto scale-[1.05] sm:h-5 sm:scale-[1.15] md:h-6 md:scale-100 lg:h-7 origin-left"/>
           </button>
 
-          <button onClick={() => router.push("/")} className="button-navbar-off hidden md:inline">
+          <button onClick={() => router.push("/")} className={`${activeNav("/")} hidden md:inline`}>
             Beranda
           </button>
 
           <button
             onClick={() => router.push("/learning")}
-            className="rounded-full bg-[#EDCD50]/65 px-4 py-1 text-sm font-semibold text-gray-900"
+            className={activeNav("/learning")}
           >
             Belajar
           </button>
@@ -56,7 +62,7 @@ export default function Navbar() {
           <div ref={careerRef} className="relative">
             <button
               onClick={() => setOpenCareer((s) => !s)}
-              className="button-navbar-off flex items-center gap-1"
+              className={`button-navbar-off flex items-center gap-1 ${activeNav("/career")}`}
             >
               <span className="lg:inline hidden">Menu&nbsp;</span>Karir
               <img src="/dropdown.png" alt="" className="h-1 w-1.5 lg:h-1.5 lg:w-2" />
@@ -90,7 +96,7 @@ export default function Navbar() {
           <div ref={pendampingRef} className="relative">
             <button
               onClick={() => setOpenPendamping((s) => !s)}
-              className="button-navbar-off flex items-center gap-1"
+              className={`button-navbar-off flex items-center gap-1 ${activeNav("/supervisor")}`}
             >
               Pendamping
               <img src="/dropdown.png" alt="" className="h-1 w-1.5 lg:h-1.5 lg:w-2" />
