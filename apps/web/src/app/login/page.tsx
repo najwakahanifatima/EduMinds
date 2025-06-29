@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../_components/Button';
+import Input from '../_components/Input';
 
 const Login = () => {
   const Router = useRouter();
@@ -53,36 +54,24 @@ const Login = () => {
             </div>
           </div>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Alamat Email
-              </label>
-              <input
-                type="email"
-                value={alamatEmail}
-                required
-                onChange={(e) => setAlamatEmail(e.target.value)}
-                placeholder="Masukkan alamat email..."
-                className={`w-full px-4 py-3 bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
-                  showError && !alamatEmail ? 'border-red-500' : 'border-gray-400'
-                }`}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Kata Sandi
-              </label>
-              <input
-                type="password"
-                value={kataSandi}
-                required
-                onChange={(e) => setKataSandi(e.target.value)}
-                placeholder="Masukkan kata sandi..."
-                className={`w-full px-4 py-3 bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
-                  showError && !kataSandi ? 'border-red-500' : 'border-gray-400'
-                }`}
-              />
-            </div>
+            <Input
+              type="email"
+              label="Alamat Email"
+              placeholder="Masukkan alamat email..."
+              value={alamatEmail}
+              onChange={(e) => setAlamatEmail(e.target.value)}
+              required={true}
+              hasError={showError && !alamatEmail}
+            />
+            <Input
+              type="password"
+              label="Kata Sandi"
+              placeholder="Masukkan kata sandi..."
+              value={kataSandi}
+              onChange={(e) => setKataSandi(e.target.value)}
+              required={true}
+              hasError={showError && !kataSandi}
+            />
           </div>
           {showError && (
             <div className="text-red-500 text-sm mt-2">
