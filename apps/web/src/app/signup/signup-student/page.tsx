@@ -36,8 +36,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="w-full bg-[#1C245B] h-2.5 mb-5">
+    <div className="min-h-screen bg-gray-50 m-2">
+      <div className="w-full bg-[#1C245B] h-2.5 mb-5 rounded-full overflow-hidden">
         <div 
           className="bg-[#7375F3] h-2.5 rounded-r-full transition-all duration-500 ease-out" 
           style={{width: `${progressWidth}%`}}
