@@ -66,7 +66,7 @@ export default function Navbar() {
               <div className="absolute left-1/2 mt-2 w-40 -translate-x-1/2 overflow-hidden rounded-xl border border-gray-800 bg-white shadow-lg">
                 <button
                   onClick={() => {
-                    router.push("/ganti_karir");
+                    router.push("/career");
                     setOpenCareer(false);
                   }}
                   className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
@@ -75,7 +75,7 @@ export default function Navbar() {
                 </button>
                 <button
                   onClick={() => {
-                    router.push("/cari_lowongan");
+                    router.push("/career");
                     setOpenCareer(false);
                   }}
                   className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
