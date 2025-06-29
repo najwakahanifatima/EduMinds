@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 type ItemType = "lesson" | "task";
@@ -25,6 +26,7 @@ export default function LearningItemCard({
     onReview,
     onResult,
 }: LearningItemCardProps) {
+    const router = useRouter();
     const [open, setOpen] = useState(false);
 
     const iconSrc =
@@ -77,6 +79,7 @@ export default function LearningItemCard({
             onClick={(e) => {
                 e.stopPropagation();
                 primaryHandler?.();
+                router.push(`/learning/${type}/${idx}`);
             }}
             disabled={!primaryHandler}
             className="
