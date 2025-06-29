@@ -1,5 +1,7 @@
 'use client'
+
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '../../_components/Button';
 
 interface Answers {
@@ -55,12 +57,12 @@ const quizData = [
 },
 ];
   
-
 const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [allAnswers, setAllAnswers] = useState<Answers>({});
   const [isFinished, setIsFinished] = useState(false);
   const [progressWidth, setProgressWidth] = useState(0);
+  const Router = useRouter();
 
   const totalQuestions = quizData.length;
   const currentQuestion = quizData[currentQuestionIndex];
@@ -102,29 +104,42 @@ const QuizPage = () => {
     }
   };
 
-  const restartQuiz = () => {
-    setIsFinished(false);
-    setCurrentQuestionIndex(0);
-    setAllAnswers({});
-  }
-
   if (isFinished) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center p-4">
-        <h1 className="text-4xl font-bold text-[#1E1E1E] mb-4">Tes Awal Selesai!</h1>
-        <p className="text-lg text-gray-700 mb-8">Terima kasih telah berpartisipasi.</p>
-        <button
-          onClick={restartQuiz}
-          className="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105"
-        >
-          Ulangi Kuis
-        </button>
+      <div className="h-screen m-2 overflow-hidden flex flex-col">
+        <div className="w-full bg-[#1C245B] h-1.5 rounded-full overflow-hidden flex-shrink-0">
+        </div>
+        <div className="max-w-xl mx-auto px-4 flex flex-col items-center justify-center flex-1">
+          <h1 className="font-semibold text-3xl text-center mb-5 text-[#1E1E1E]">
+            Selamat!
+          </h1>
+          <p className="text-lg font-semibold text-gray-700 mb-8 text-center">Tes awal kamu sudah selesai. Hasilnya adalah...</p>
+         
+          <div className="bg-[#6669E3] border-2 border-gray-700 text-white font-semibold py-4 px-6 rounded-full mb-6 w-full h-14 max-w-md flex items-center justify-center">
+            <span className="text-2xl mr-4">🏆</span>
+            <span className="text-xl">KAMU TERAMPIL</span>
+          </div>
+         
+          <div className="bg-[#dddeff] text-left py-6 px-10 border-2 border-[#5f61d6] rounded-xl w-full max-w-md mb-8">
+            <h3 className="text-[#1C245B] font-semibold text-md mb-4 text-center">Kamu hebat dalam:</h3>
+            <ul className="space-y-2 text-[#1C245B]">
+              <li>• Menggambar dan mewarnai</li>
+              <li>• Memperbaiki barang</li>
+              <li>• Menyusun puzzle</li>
+              <li>• Membuat kerajinan tangan</li>
+            </ul>
+          </div>
+         
+          <Button width="200px" bgColor="#EDCD50" onClick={() => Router.push("/user-dashboard")}>
+            Lanjut
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-50 m-2 flex flex-col">
+    <div className="h-screen overflow-hidden m-2 flex flex-col font-sans">
       <div className="w-full bg-[#1C245B] h-2.5 mb-5 rounded-full overflow-hidden">
         <div
           className="bg-[#7375F3] h-2.5 rounded-r-full transition-all duration-500 ease-out"
@@ -151,10 +166,10 @@ const QuizPage = () => {
                     key={index}
                     onClick={() => handleOptionSelect(option)}
                     className={`
-                      w-full h-12 p-4 border-1 rounded-lg text-center cursor-pointer transition-all duration-200 flex items-center justify-center
+                      w-full h-12 p-4 border rounded-lg text-center cursor-pointer transition-all duration-200 flex items-center justify-center
                       ${isSelected 
-                        ? 'bg-[#E9FFF3] border-[#59a87e] text-[#234e38]' 
-                        : 'bg-white border-[#1E1E1E] hover:bg-gray-100 hover:border-gray-400'
+                        ? 'bg-[#E9FFF3] border-2 border-[#59a87e] text-[#234e38]' 
+                        : 'bg-white border border-gray-400 hover:bg-gray-100 hover:border-gray-400'
                       }
                     `}
                   >
@@ -165,25 +180,24 @@ const QuizPage = () => {
             </div>
 
             <div className="mt-12 flex justify-center items-center space-x-8">
-            <Button
-                onClick={handlePreviousQuestion}
-                bgColor="#B3EBCE"
-                width="175px"
-                disabled={currentQuestionIndex === 0}
-            >
-                Kembali
-            </Button>
+              <Button
+                  onClick={handlePreviousQuestion}
+                  bgColor="#B3EBCE"
+                  width="175px"
+                  disabled={currentQuestionIndex === 0}
+              >
+                  Kembali
+              </Button>
             
-            <Button
-                onClick={handleNextQuestion}
-                bgColor="#EDCD50"
-                width="175px"
-                disabled={currentAnswers.length === 0}
-            >
-                {currentQuestionIndex === totalQuestions - 1 ? 'Selesai' : 'Lanjut'}
-            </Button>
+              <Button
+                  onClick={handleNextQuestion}
+                  bgColor="#EDCD50"
+                  width="175px"
+                  disabled={currentAnswers.length === 0}
+              >
+                  {currentQuestionIndex === totalQuestions - 1 ? 'Selesai' : 'Lanjut'}
+              </Button>
             </div>
-
           </>
         )}
       </div>
