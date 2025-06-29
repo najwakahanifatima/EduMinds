@@ -11,7 +11,7 @@ const Home = () => {
       <img src="logo.png" className="mx-auto w-72 -mt-6 mb-6"/>
       <div className="flex flex-col items-center gap-4">
         <Button bgColor="#EDCD50" onClick={() => Router.push("/login")} width="275px">Masuk</Button>
-        <Button bgColor="#B3EBCE" width="275px">Daftar Akun</Button>
+        <Button bgColor="#B3EBCE" onClick={() => Router.push("/signup")} width="275px">Daftar Akun</Button>
       </div>
     </div>
   )
