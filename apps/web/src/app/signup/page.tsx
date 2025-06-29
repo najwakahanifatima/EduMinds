@@ -7,7 +7,7 @@ const SignUp = () => {
  
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-      <h1 className="font-semibold text-3xl text-center mb-12 text-gray-800">
+      <h1 className="font-semibold text-3xl text-center mb-12 text-[#1E1E1E]">
         Daftar sebagai <span className="text-[#2A3AA9]">Pelajar</span> atau <span className="text-[#2A3AA9]">Supervisor</span>?
       </h1>
      
@@ -20,7 +20,7 @@ const SignUp = () => {
               Belajar dan berlatih untuk siap kerja sesuai jalur karier pilihanmu
             </p>
           </div>
-          <Button width="320px" fontWeight="font-medium">
+          <Button width="320px" fontWeight="font-medium" onClick={() => Router.push("/signup/signup-student")}>
             Daftar sebagai Pelajar
           </Button>
         </div>
