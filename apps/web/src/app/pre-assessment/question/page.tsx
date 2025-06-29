@@ -113,7 +113,7 @@ const QuizPage = () => {
           <h1 className="font-semibold text-3xl text-center mb-5 text-[#1E1E1E]">
             Selamat!
           </h1>
-          <p className="text-lg font-semibold text-gray-700 mb-8 text-center">Tes awal kamu sudah selesai. Hasilnya adalah...</p>
+          <p className="text-lg font-medium text-gray-700 mb-8 text-center">Tes awal kamu sudah selesai. Hasilnya adalah...</p>
          
           <div className="bg-[#6669E3] border-2 border-gray-700 text-white font-semibold py-4 px-6 rounded-full mb-6 w-full h-14 max-w-md flex items-center justify-center">
             <span className="text-2xl mr-4">🏆</span>
@@ -182,7 +182,7 @@ const QuizPage = () => {
             <div className="mt-12 flex justify-center items-center space-x-8">
               <Button
                   onClick={handlePreviousQuestion}
-                  bgColor="#B3EBCE"
+                  bgColor="#EDCD50"
                   width="175px"
                   disabled={currentQuestionIndex === 0}
               >
@@ -191,7 +191,7 @@ const QuizPage = () => {
             
               <Button
                   onClick={handleNextQuestion}
-                  bgColor="#EDCD50"
+                  bgColor="#B3EBCE"
                   width="175px"
                   disabled={currentAnswers.length === 0}
               >
