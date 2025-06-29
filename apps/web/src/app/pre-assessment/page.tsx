@@ -8,7 +8,7 @@ const PreAssessment = () => {
   const Router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 m-2">
+    <div className="min-h-screen m-2">
         <div className="w-full bg-[#1C245B] h-1.5 mb-5 rounded-full overflow-hidden">
         </div>
         <div className="max-w-xl mx-auto pt-16 px-4 mt-32 flex flex-col items-center">

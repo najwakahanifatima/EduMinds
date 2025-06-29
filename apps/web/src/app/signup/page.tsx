@@ -6,7 +6,7 @@ const SignUp = () => {
   const Router = useRouter();
  
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <h1 className="font-semibold text-3xl text-center mb-12 text-[#1E1E1E]">
         Daftar sebagai <span className="text-[#2A3AA9]">Pelajar</span> atau <span className="text-[#2A3AA9]">Supervisor</span>?
       </h1>
