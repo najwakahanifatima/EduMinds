@@ -24,16 +24,16 @@ interface BarChartProps {
 }
 
 const StatCard = ({ value, label }: StatCardProps) => (
-  <div className="bg-indigo-100 border border-[#6669E3] rounded-2xl p-7 text-center">
-      <p className="text-3xl font-bold text-[#3D3FA0] mb-4">{value}</p>
-      <p className="text-md text-[#3D3FA0] mt-2">{label}</p>
+  <div className="bg-indigo-100 border border-[#6669E3] text-[#3D3FA0] rounded-2xl p-7 text-center">
+      <p className="text-3xl font-bold mb-4">{value}</p>
+      <p className="text-md mt-2">{label}</p>
   </div>
 );
 
 const JourneyStep = ({ step, title }: JourneyStepProps) => (
   <div className="bg-[#C2EED7] rounded-xl p-5 text-left w-full flex-1 h-28 flex flex-col">
-      <p className="text-xs text-[#5254A8] font-semibold mb-2">Langkah ke-{step}</p>
-      <div className="text-[#1A1C7B] flex-1 flex items-center">
+      <p className="text-xs text-gray-600 font-semibold mb-2">Langkah ke-{step}</p>
+      <div className="text-[#1E1E1E] flex-1 flex items-center">
           <p className="font-medium">{title}</p>
       </div>
   </div>
