@@ -126,8 +126,8 @@ const UserDashboard = () => {
       <div className="bg-gray-50 min-h-screen">
           <Navbar />
 
-          <main className="px-4 md:px-10 lg:px-20 py-8 w-full mt-5">
-              <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-16">
+          <main className="px-4 md:px-10 lg:px-20 py-8 w-full mt-7">
+              <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20">
                   <h1 className="text-3xl font-bold">Selamat Datang {user.name}</h1>
                   <p className="mt-5 opacity-90">Mari review perjalananmu</p>
                   <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -139,8 +139,8 @@ const UserDashboard = () => {
                   </div>
               </section>
 
-              <section className="mb-16">
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+              <section className="mb-20">
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-7">
                       Saat ini kamu sedang menempuh jalur <span className="text-[#3D3FA0]">{careerPath}</span>
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -149,7 +149,7 @@ const UserDashboard = () => {
               </section>
 
               <section>
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-7">
                       Perkembangan belajar kamu
                   </h2>
                   <BarChart data={progressData} />
