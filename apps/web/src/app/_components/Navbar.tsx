@@ -47,7 +47,7 @@ export default function Navbar() {
             <img src="/logo-cropped.png" alt="EduMinds" className="h-4 w-auto scale-[1.05] sm:h-5 sm:scale-[1.15] md:h-6 md:scale-100 lg:h-7 origin-left"/>
           </button>
 
-          <button onClick={() => router.push("/")} className={`${activeNav("/")} hidden md:inline`}>
+          <button onClick={() => router.push("/user-dashboard")} className={`${activeNav("/user-dashboard")} hidden md:inline`}>
             Beranda
           </button>
 
