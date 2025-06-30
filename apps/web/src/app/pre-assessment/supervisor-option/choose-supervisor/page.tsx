@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Input from '../../../_components/Input';
 import Button from '../../../_components/Button';
 
@@ -19,14 +20,13 @@ interface SupervisorCardProps {
     onSelect: (id: number) => void;
 }
 
-// INI MASIH DUMMY
 const supervisorData: Supervisor[] = [
     { id: 1, name: 'Jane Doe', gender: 'Perempuan', age: 28, experience: 'Menjadi floris selama 5 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JD' },
     { id: 2, name: 'John Smith', gender: 'Laki-laki', age: 32, experience: 'Koki profesional selama 8 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JS' },
-    { id: 3, name: 'Ahmad Yusuf', gender: 'Laki-laki', age: 25, experience: 'Barista dengan 3 tahun pengalaman', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=AY' },
-    { id: 4, name: 'Siti Aminah', gender: 'Perempuan', age: 35, experience: 'Manager toko bunga selama 10 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=SA' },
-    { id: 5, name: 'Budi Santoso', gender: 'Laki-laki', age: 29, experience: 'Spesialis kopi dan latte art', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=BS' },
-    { id: 6, name: 'Dewi Lestari', gender: 'Perempuan', age: 22, experience: 'Asisten koki di restoran ternama', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=DL' },
+    { id: 3, name: 'Elijah Doe', gender: 'Laki-laki', age: 25, experience: 'Barista dengan 3 tahun pengalaman', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=ED' },
+    { id: 4, name: 'Grace Smith', gender: 'Perempuan', age: 35, experience: 'Manager toko bunga selama 10 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=GS' },
+    { id: 5, name: 'Bob Mateo', gender: 'Laki-laki', age: 29, experience: 'Spesialis kopi dan latte art', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=BM' },
+    { id: 6, name: 'Stella Hunter', gender: 'Perempuan', age: 22, experience: 'Asisten koki di restoran ternama', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=SH' },
 ];
 
 const SupervisorCard = ({ supervisor, isSelected, onSelect }: SupervisorCardProps) => (
@@ -49,6 +49,7 @@ const SupervisorCard = ({ supervisor, isSelected, onSelect }: SupervisorCardProp
 );
 
 const SupervisorSelectionPage = () => {
+    const Router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredSupervisors, setFilteredSupervisors] = useState<Supervisor[]>(supervisorData);
     const [selectedSupervisorId, setSelectedSupervisorId] = useState<number | null>(null);
@@ -69,7 +70,7 @@ const SupervisorSelectionPage = () => {
 
     const handleConfirmSelection = () => {
         if (selectedSupervisorId) {
-            const selected = supervisorData.find(s => s.id === selectedSupervisorId);
+            Router.push(`/pre-assessment/supervisor-option/choose-supervisor/proceed-supervisor?id=${selectedSupervisorId}`);
         }
     };
     
