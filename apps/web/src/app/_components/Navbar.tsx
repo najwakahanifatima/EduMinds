@@ -11,6 +11,17 @@ export default function Navbar() {
     pathname === prefix || pathname.startsWith(prefix + "/")
       ? "rounded-full bg-[#EDCD50]/65 px-4 py-1 font-semibold text-gray-900"
       : "button-navbar-off";
+
+  // Function khusus untuk pendamping karena ada multiple routes
+  const activePendamping = (): string => {
+    const pendampingRoutes = ["/lihat-pendamping", "/pendamping", "/supervisor"];
+    const isActive = pendampingRoutes.some(route => 
+      pathname === route || pathname.startsWith(route + "/")
+    );
+    return isActive 
+      ? "rounded-full bg-[#EDCD50]/65 px-4 py-1 font-semibold text-gray-900"
+      : "button-navbar-off";
+  };
   
   /* ── state dropdown ─────────────────────────── */
   const [openCareer, setOpenCareer] = useState(false);
@@ -38,6 +49,7 @@ export default function Navbar() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+  
   return (
     <div className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur">
       <div className="mx-4 md:mx-6 lg:mx-8 flex border-b-2 flex-row items-center justify-between px-2 sm:px-4 md:px-6 py-2">
@@ -96,7 +108,7 @@ export default function Navbar() {
           <div ref={pendampingRef} className="relative">
             <button
               onClick={() => setOpenPendamping((s) => !s)}
-              className={`button-navbar-off flex items-center gap-1 ${activeNav("/supervisor")}`}
+              className={`button-navbar-off flex items-center gap-1 ${activePendamping()}`}
             >
               Pendamping
               <img src="/dropdown.png" alt="" className="h-1 w-1.5 lg:h-1.5 lg:w-2" />
@@ -106,7 +118,7 @@ export default function Navbar() {
               <div className="absolute left-1/2 mt-2 w-44 -translate-x-1/2 overflow-hidden rounded-xl border border-gray-800 bg-white shadow-lg">
                 <button
                   onClick={() => {
-                    router.push("/pendamping/lihat");
+                    router.push("/lihat-pendamping");
                     setOpenPendamping(false);
                   }}
                   className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
