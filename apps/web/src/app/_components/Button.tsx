@@ -45,7 +45,9 @@ export default function Button({
         height: height === 'full' ? '100%' : height,
       }}
     >
-      {children}
+      <div className="flex items-center justify-center gap-2">
+        {children}
+      </div>
     </button>
   );
 }

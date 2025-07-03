@@ -127,9 +127,9 @@ const UserDashboard = () => {
           <Navbar />
 
           <main className="px-4 md:px-10 lg:px-20 py-8 w-full mt-7">
-              <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20">
-                  <h1 className="text-3xl font-bold">Selamat Datang {user.name}</h1>
-                  <p className="mt-5 opacity-90">Mari review perjalananmu</p>
+              <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20 border-2 border-[#1E1E1E] shadow-[0px_2px_0_rgba(30,30,30,1)]">
+                  <h1 className="text-2xl font-semibold">Selamat Datang <span className="text-[#FDE06C]">{user.name}</span></h1>
+                  <p className="mt-5 text-[#eaeaff]">Mari review perjalananmu</p>
                   <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-4">
                       <JourneyStep step={journey[0].step} title={journey[0].title} />
                       <p className="text-[#FDE06C] font-medium text-4xl">&gt;</p>

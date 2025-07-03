@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Navbar from '../_components/Navbar';
+import Button from '../_components/Button';
 
 
 // Buat pengganti profile sementara
@@ -33,7 +34,7 @@ interface FeedbackData {
 
 // INI MASIH DUMMU
 // Untuk melihat tampilan kalo belum punya pendamping, ubah jadi:
-// const supervisorData: SupervisorData | null = null;
+//const supervisorData: SupervisorData | null = null;
 const supervisorData: SupervisorData | null = {
   name: "Jane Doe",
   gender: "Perempuan",
@@ -49,7 +50,7 @@ const allFeedback: FeedbackData[] = [
     title: "Komunikasi yang Baik",
     score: 85,
     strengths: "Artikulasi jelas, intonasi cocok",
-    improvements: "Suara kurang keras"
+    improvements: "Keraskan suara"
   },
   {
     id: 2,
@@ -57,7 +58,7 @@ const allFeedback: FeedbackData[] = [
     title: "Dasar Memahami Pelanggan",
     score: 65,
     strengths: "Pemahaman cepat",
-    improvements: "Berbeda pemahaman dengan pelanggan"
+    improvements: "Dengarkan baik-baik apa yang diminta pelanggan"
   },
   {
     id: 3,
@@ -65,7 +66,7 @@ const allFeedback: FeedbackData[] = [
     title: "Mempelajari Bunga",
     score: 55,
     strengths: "Pemahaman cepat",
-    improvements: "Masih salah dalam penamaan dan makna bunga"
+    improvements: "Tingkatkan hafalan penamaan bunga"
   },
   {
     id: 4,
@@ -73,7 +74,7 @@ const allFeedback: FeedbackData[] = [
     title: "Teknik Dasar Merangkai",
     score: 92,
     strengths: "Teknik sangat baik, kreatif",
-    improvements: "Waktu pengerjaan bisa dipercepat"
+    improvements: "Bisa percepat waktu pengerjaan"
   },
   {
     id: 5,
@@ -94,39 +95,43 @@ const allFeedback: FeedbackData[] = [
 ];
 
 const SupervisorCard = ({ supervisor }: { supervisor: SupervisorData | null }) => (
-  <section className="bg-[#3D3FA0] text-white rounded-3xl p-6 md:p-8 mb-12 md:mb-20">
-    <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-6 sm:space-y-0 sm:space-x-6">
+  <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20 border-2 border-[#1E1E1E] shadow-[0px_2px_0_rgba(30,30,30,1)]">
+    <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-6 sm:space-y-0 sm:space-x-6 ml-8">
       <div className="flex-shrink-0">
         {supervisor ? (
-          <div className="w-24 h-24 bg-[#C2EED7] rounded-2xl flex items-center justify-center text-3xl font-bold text-[#1E3A8A]">
+          <div className="w-28 h-28 bg-[#E9F7F0] rounded-full flex items-center justify-center text-4xl font-semibold text-[#1E1E1E]/85">
             {supervisor.initials}
           </div>
         ) : (
-          <div className="w-24 h-24 bg-[#D8D3E9] rounded-2xl flex items-center justify-center">
+          <div className="w-28 h-28 bg-[#D8D3E9] rounded-full flex items-center justify-center my-4">
             {/* Profil kosong */}
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+            </svg> */}
+            <img src="no-profile.png" className="rounded-full w-28 h-28 object-cover" />
           </div>
         )}
       </div>
       <div className="flex-grow text-center sm:text-left">
         {supervisor ? (
-          <>
-            <h3 className="text-2xl md:text-3xl font-bold mb-2">{supervisor.name}</h3>
-            <p className="text-base md:text-lg mb-1 opacity-90">{supervisor.gender}, {supervisor.age}</p>
-            <p className="text-base md:text-lg mb-6 opacity-90">{supervisor.experience}</p>
-            <button className="bg-[#C2EED7] hover:bg-[#A9E5C1] text-[#1E1E1E] font-bold px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors mx-auto sm:mx-0">
-              <span>Hubungi Pendamping</span>
-            </button>
-          </>
+          <div className="ml-12">
+            <h3 className="text-xl md:text-2xl font-semibold mb-2 text-[#FFE16B]">{supervisor.name}</h3>
+            <p className="mb-1 text-[#FAFAF6]">{supervisor.gender}, {supervisor.age}</p>
+            <p className="mb-6 text-[#FAFAF6]">{supervisor.experience}</p>
+            <Button bgColor="#B3EBCE" width="90%">
+              {/* onclick bakal diarahin ke chat */}
+              <p>Hubungi Pendamping</p> 
+              <img src="phone.png" className="w-5 h-5" />
+            </Button>
+          </div>
         ) : (
-          <>
-            <h3 className="text-2xl md:text-3xl font-bold mb-6">Kamu belum punya pendamping...</h3>
-            <button className="bg-[#C2EED7] hover:bg-[#A9E5C1] text-[#1E1E1E] font-bold px-6 py-3 rounded-xl flex items-center space-x-2 transition-colors mx-auto sm:mx-0">
-              <span>Cari Pendamping</span>
-            </button>
-          </>
+          <div className="ml-12">
+            <h3 className="text-xl md:text-2xl font-semibold mb-10">Kamu belum punya pendamping...</h3>
+            <Button bgColor="#B3EBCE" width="90%">
+              <p>Cari Pendamping</p> 
+              <img src="search.png" className="w-5 h-5" />
+            </Button>
+          </div>
         )}
       </div>
     </div>
@@ -135,9 +140,9 @@ const SupervisorCard = ({ supervisor }: { supervisor: SupervisorData | null }) =
 
 const FeedbackCard = ({ feedback }: { feedback: FeedbackData }) => {
   const getCardStyle = (score: number): { container: string; border: string } => {
-    if (score >= 80) return { container: 'bg-[#C2EED7]', border: 'border-[#4ADE80]' };
-    if (score >= 60) return { container: 'bg-[#FED7AA]', border: 'border-[#FB923C]' };
-    return { container: 'bg-[#E0F2FE]', border: 'border-[#6669E3]' };
+    if (score >= 80) return { container: 'bg-[#C5E9CD]/50', border: 'border-[#308242] border-l-10 border' };
+    if (score >= 60) return { container: 'bg-[#FFE5B0]/50', border: 'border-[#B57900] border-l-10 border' };
+    return { container: 'bg-[#CBE6FF]/50', border: 'border-[#72A8DA] border-l-10 border' };
   };
 
   const getStarRating = (score: number): number => {
@@ -181,7 +186,7 @@ const FeedbackCard = ({ feedback }: { feedback: FeedbackData }) => {
             <p className="text-gray-600 text-sm">{feedback.strengths}</p>
           </div>
           <div>
-            <p className="font-bold text-gray-700 mb-1">Perlu diperbaiki:</p>
+            <p className="font-bold text-gray-700 mb-1">Tips perbaikan:</p>
             <p className="text-gray-600 text-sm">{feedback.improvements}</p>
           </div>
         </div>
@@ -201,7 +206,7 @@ const App = () => {
     <div className="bg-gray-50 min-h-screen font-sans">
       <Navbar />
 
-      <main className="px-4 md:px-10 lg:px-20 py-8 w-full">
+      <main className="px-4 md:px-10 lg:px-20 py-8 w-full mt-7">
         <h2 className="text-2xl font-semibold text-gray-800 mb-8">Detail Pendamping</h2>
 
         <SupervisorCard supervisor={currentSupervisor} />
@@ -215,10 +220,10 @@ const App = () => {
               ))}
             </div>
             {allFeedback.length > 3 && (
-              <div className="text-center mt-8">
+              <div className="text-right mt-8">
                 <button
+                  className="text-[#1A1C7B] hover:text-[#5254A8] underline"
                   onClick={() => setShowAllFeedback(!showAllFeedback)}
-                  className="text-[#3D3FA0] hover:underline font-bold text-lg"
                 >
                   {showAllFeedback ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
                 </button>
