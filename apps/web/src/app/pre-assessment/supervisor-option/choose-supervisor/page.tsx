@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from '../../../_components/Input';
 import Button from '../../../_components/Button';
+import SupervisorCard from '@/app/_components/SupervisorCard';
 
 interface Supervisor {
     id: number;
@@ -14,12 +15,6 @@ interface Supervisor {
     avatar: string;
 }
 
-interface SupervisorCardProps {
-    supervisor: Supervisor;
-    isSelected: boolean;
-    onSelect: (id: number) => void;
-}
-
 const supervisorData: Supervisor[] = [
     { id: 1, name: 'Jane Doe', gender: 'Perempuan', age: 28, experience: 'Menjadi floris selama 5 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JD' },
     { id: 2, name: 'John Smith', gender: 'Laki-laki', age: 32, experience: 'Koki profesional selama 8 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JS' },
@@ -28,25 +23,6 @@ const supervisorData: Supervisor[] = [
     { id: 5, name: 'Bob Mateo', gender: 'Laki-laki', age: 29, experience: 'Spesialis kopi dan latte art', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=BM' },
     { id: 6, name: 'Stella Hunter', gender: 'Perempuan', age: 22, experience: 'Asisten koki di restoran ternama', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=SH' },
 ];
-
-const SupervisorCard = ({ supervisor, isSelected, onSelect }: SupervisorCardProps) => (
-    <div
-        onClick={() => onSelect(supervisor.id)}
-        className={`
-            bg-[#4A4E8A] rounded-3xl p-4 flex items-center gap-4
-            cursor-pointer transition-all duration-200
-            border-2 max-w-md shadow-[0px_2px_0_rgba(30,30,30,1)]
-            ${isSelected ? 'border-[#B3EBD6]' : 'border-[#1E1E1E]'}
-        `}
-    >
-        <img src={supervisor.avatar} alt={supervisor.name} className="w-16 h-16 rounded-full object-cover" />
-        <div className="text-white p-1">
-            <h3 className="font-semibold text-[#FFE16B]">{supervisor.name}</h3>
-            <p className="text-sm mt-1">{supervisor.gender}, {supervisor.age} tahun</p>
-            <p className="text-xs mt-2">{supervisor.experience}</p>
-        </div>
-    </div>
-);
 
 const SupervisorSelectionPage = () => {
     const Router = useRouter();

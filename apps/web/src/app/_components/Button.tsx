@@ -4,9 +4,10 @@ type ButtonProps = {
   textColor?: string;
   borderColor?: string;
   fontWeight?: string;
+  fontSize?: string;
   width?: string | number;
   height?: string | number;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
 };
@@ -17,6 +18,7 @@ export default function Button({
   textColor = '#1E1E1E',
   borderColor = '#1E1E1E',
   fontWeight = 'font-semibold',
+  fontSize = 'text-base',
   width,
   height,
   onClick,
@@ -30,6 +32,7 @@ export default function Button({
       disabled={disabled}
       className={`
         ${fontWeight}
+        ${fontSize}
         border-[1px]
         rounded-lg
         px-6 py-2

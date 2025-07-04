@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '../_components/Navbar';
 import Button from '../_components/Button';
 
@@ -94,49 +95,48 @@ const allFeedback: FeedbackData[] = [
   }
 ];
 
-const SupervisorCard = ({ supervisor }: { supervisor: SupervisorData | null }) => (
-  <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20 border-2 border-[#1E1E1E] shadow-[0px_2px_0_rgba(30,30,30,1)]">
-    <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-6 sm:space-y-0 sm:space-x-6 ml-8">
-      <div className="flex-shrink-0">
-        {supervisor ? (
-          <div className="w-28 h-28 bg-[#E9F7F0] rounded-full flex items-center justify-center text-4xl font-semibold text-[#1E1E1E]/85">
-            {supervisor.initials}
-          </div>
-        ) : (
-          <div className="w-28 h-28 bg-[#D8D3E9] rounded-full flex items-center justify-center my-4">
-            {/* Profil kosong */}
-            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg> */}
-            <img src="no-profile.png" className="rounded-full w-28 h-28 object-cover" />
-          </div>
-        )}
+const SupervisorCard = ({ supervisor }: { supervisor: SupervisorData | null }) => {
+  const Router = useRouter();
+  
+  return (
+    <section className="bg-[#3D3FA0] text-white rounded-3xl p-8 mb-20 border-2 border-[#1E1E1E] shadow-[0px_2px_0_rgba(30,30,30,1)]">
+      <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-6 sm:space-y-0 sm:space-x-6 ml-8">
+        <div className="flex-shrink-0">
+          {supervisor ? (
+            <div className="w-28 h-28 bg-[#E9F7F0] rounded-full flex items-center justify-center text-4xl font-semibold text-[#1E1E1E]/85">
+              {supervisor.initials}
+            </div>
+          ) : (
+            <div className="w-28 h-28 bg-[#D8D3E9] rounded-full flex items-center justify-center my-4">
+              <img src="no-profile.png" className="rounded-full w-28 h-28 object-cover" />
+            </div>
+          )}
+        </div>
+        <div className="flex-grow text-center sm:text-left">
+          {supervisor ? (
+            <div className="ml-12">
+              <h3 className="text-xl md:text-2xl font-semibold mb-2 text-[#FFE16B]">{supervisor.name}</h3>
+              <p className="mb-1 text-[#FAFAF6]">{supervisor.gender}, {supervisor.age}</p>
+              <p className="mb-6 text-[#FAFAF6]">{supervisor.experience}</p>
+              <Button bgColor="#B3EBCE" width="90%">
+                <p>Hubungi Pendamping</p>
+                <img src="phone.png" className="w-5 h-5" />
+              </Button>
+            </div>
+          ) : (
+            <div className="ml-12">
+              <h3 className="text-xl md:text-2xl font-semibold mb-10">Kamu belum punya pendamping...</h3>
+              <Button onClick={() => Router.push("/cari-pendamping")} bgColor="#B3EBCE" width="90%">
+                <p>Cari Pendamping</p>
+                <img src="search.png" className="w-5 h-5" />
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="flex-grow text-center sm:text-left">
-        {supervisor ? (
-          <div className="ml-12">
-            <h3 className="text-xl md:text-2xl font-semibold mb-2 text-[#FFE16B]">{supervisor.name}</h3>
-            <p className="mb-1 text-[#FAFAF6]">{supervisor.gender}, {supervisor.age}</p>
-            <p className="mb-6 text-[#FAFAF6]">{supervisor.experience}</p>
-            <Button bgColor="#B3EBCE" width="90%">
-              {/* onclick bakal diarahin ke chat */}
-              <p>Hubungi Pendamping</p> 
-              <img src="phone.png" className="w-5 h-5" />
-            </Button>
-          </div>
-        ) : (
-          <div className="ml-12">
-            <h3 className="text-xl md:text-2xl font-semibold mb-10">Kamu belum punya pendamping...</h3>
-            <Button bgColor="#B3EBCE" width="90%">
-              <p>Cari Pendamping</p> 
-              <img src="search.png" className="w-5 h-5" />
-            </Button>
-          </div>
-        )}
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const FeedbackCard = ({ feedback }: { feedback: FeedbackData }) => {
   const getCardStyle = (score: number): { container: string; border: string } => {
@@ -199,7 +199,7 @@ const FeedbackCard = ({ feedback }: { feedback: FeedbackData }) => {
 const App = () => {
   const [currentSupervisor] = useState<SupervisorData | null>(supervisorData);
   const [showAllFeedback, setShowAllFeedback] = useState(false);
-
+  const Router = useRouter();
   const displayedFeedback = showAllFeedback ? allFeedback : allFeedback.slice(0, 3);
 
   return (

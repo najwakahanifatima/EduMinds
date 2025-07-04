@@ -12,9 +12,8 @@ export default function Navbar() {
       ? "rounded-full bg-[#EDCD50]/65 px-4 py-1 font-semibold text-gray-900"
       : "button-navbar-off";
 
-  // Function khusus untuk pendamping karena ada multiple routes
   const activePendamping = (): string => {
-    const pendampingRoutes = ["/lihat-pendamping", "/pendamping", "/supervisor"];
+    const pendampingRoutes = ["/cari-pendamping", "/lihat-pendamping", "/pendamping", "/supervisor"];
     const isActive = pendampingRoutes.some(route => 
       pathname === route || pathname.startsWith(route + "/")
     );
@@ -127,7 +126,7 @@ export default function Navbar() {
                 </button>
                 <button
                   onClick={() => {
-                    router.push("/pendamping/cari");
+                    router.push("/cari-pendamping");
                     setOpenPendamping(false);
                   }}
                   className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
