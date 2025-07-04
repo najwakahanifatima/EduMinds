@@ -3,7 +3,8 @@
 import React from "react";
 import Navbar from "@/app/_components/Navbar";
 import JobCard from "@/app/_components/JobCard";
-import Image from "next/image";
+import { useState, useRef } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 export default function CareerPage() {
   /* dummy data */
@@ -13,17 +14,38 @@ export default function CareerPage() {
     { company: "PT Keren", title: "Pengisi Acara", location: "Bandung", time: "6 Bulan", salary: "Rp 5.000.000", path: "#" },
   ];
 
-  const otherJobs = [
-    { title: "Barista" },
-    { title: "Koki" },
-    { title: "Teknisi" },
+  const otherCareer = [
+    { 
+        name: 'Barista', 
+        icon: '/barista.png'
+    },
+    { 
+        name: 'Floris',
+        icon: '/floris.png'
+    },
+    { 
+        name: 'Koki',
+        icon: '/koki.png'
+     },
   ];
+  const [selectedCareer, setSelectedCareer] = useState<string | null>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const scrollByCard = (dir: "left" | "right") => {
+    if (!listRef.current) return;
+    const cardWidth = listRef.current.firstElementChild?.clientWidth ?? 0;
+    listRef.current.scrollBy({
+      left: dir === "left" ? -cardWidth - 32 /* gap-x */ : cardWidth + 32,
+      behavior: "smooth",
+    });
+  };
+  const handleSelectCareer = (name: string) =>
+    setSelectedCareer((prev) => (prev === name ? null : name));
 
   return (
     <>
       <Navbar />
 
-      <main className="px:10 md:px-20 w-full overflow-hidden">
+      <main className="px:10 md:px-20 lg:px-40 w-full overflow-hidden">
         {/* HERO */}
         <section className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
@@ -56,13 +78,13 @@ export default function CareerPage() {
             </h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center justify-center">
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center justify-center md:mx-5 lg:mx-10">
             {recommended.map((job) => (
               <JobCard key={job.title} {...job} />
             ))}
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="text-xs font-semibold mt-4 text-[#6669E3] underline">
+            <button className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
                 Lihat lebih banyak →
             </button>
           </div>
@@ -74,9 +96,50 @@ export default function CareerPage() {
             <h2 className="text-xl font-bold text-gray-900">
               Lihat pekerjaan dari jalur belajar lain
             </h2>
+            
           </div>
+          <div className="relative mb-5 md:mx-5 lg:mx-10" >
+            <button
+              onClick={() => scrollByCard("left")}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 items-center justify-center rounded-full border bg-white shadow hover:bg-gray-100"
+            >
+              <ChevronLeftIcon className="h-4 w-4" />
+            </button>
 
-          Nanti
+            <div ref={listRef}
+              className="mx-10 overflow-x-auto scroll-smooth
+                [&::-webkit-scrollbar]:hidden scrollbar-width:none grid gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center justify-center">
+              {otherCareer.map((c) => {
+                return (
+                  <div
+                    key={c.name}
+                    onClick={() => handleSelectCareer(c.name)}
+                    className="
+                      flex min-w-[240px] flex-col items-center justify-between
+                      rounded-3xl p-6 text-center transition border bg-[#E9F7F0]"
+                  >
+                    <div className="h-28 w-28 mb-4 flex items-center justify-center">
+                      <img src={c.icon} alt={c.name} className="max-h-full max-w-full" />
+                    </div>
+                    <h3 className="font-bold text-xl text-[#1E1E1E]">{c.name}</h3>
+                    <button className="mt-4 rounded-md border border-yellow-600 bg-yellow-400 px-3 py-1 text-xs font-bold hover:bg-yellow-500">
+                      Lihat Lowongan
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            <button
+              onClick={() => scrollByCard("right")}
+              className="hidden md:flex h-8 w-8 absolute right-0 top-1/2 -translate-y-1/2 items-center justify-center rounded-full border bg-white shadow hover:bg-gray-100">
+              <ChevronRightIcon className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="mt-4 flex justify-end mb-10">
+            <button className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
+                Lihat semua jenis pekerjaan →
+            </button>
+          </div>
         </section>
       </main>
     </>
