@@ -82,7 +82,9 @@ export default function CareerPage() {
             ))}
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
+            <button 
+              onClick={() => router.push("/career/available-jobs")}
+              className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
                 Lihat lebih banyak →
             </button>
           </div>
@@ -100,20 +102,20 @@ export default function CareerPage() {
             <button
               onClick={() => scrollByCard("left")}
               className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 h-8 w-8 items-center justify-center rounded-full border bg-white shadow hover:bg-gray-100"
-            >
+              >
               <ChevronLeftIcon className="h-4 w-4" />
             </button>
 
             <div ref={listRef}
               className="mx-10 overflow-x-auto scroll-smooth
-                [&::-webkit-scrollbar]:hidden scrollbar-width:none grid gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center justify-center">
+              [&::-webkit-scrollbar]:hidden scrollbar-width:none grid gap-6 sm:grid-cols-2 md:grid-cols-3 justify-items-center justify-center">
               {otherCareer.map((c) => {
                 return (
                   <div
-                    key={c.name}
-                    className="
-                      flex min-w-[240px] flex-col items-center justify-between
-                      rounded-3xl p-6 text-center transition border bg-[#B3EBCE]/70"
+                  key={c.name}
+                  className="
+                  flex min-w-[240px] flex-col items-center justify-between
+                  rounded-3xl p-6 text-center transition border bg-[#B3EBCE]/70"
                   >
                     <div className="h-16 w-16 lg:h-28 lg:w-28 mb-2 flex items-center justify-center">
                       <img src={c.icon} alt={c.name} className="max-h-full max-w-full" />
@@ -135,7 +137,9 @@ export default function CareerPage() {
             </button>
           </div>
           <div className="mt-4 flex justify-end mb-10">
-            <button className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
+            <button 
+              onClick={() => router.push("/career/available-jobs")}
+              className="text-xs font-semibold mt-4 text-[#6669E3] underline hover:scale-105">
                 Lihat semua jenis pekerjaan →
             </button>
           </div>
