@@ -32,7 +32,7 @@ const SignUp = () => {
               Mendampingi pelajar dengan bimbingan dan mentoring untuk bantu mereka siap kerja.
             </p>
           </div>
-          <Button width="320px" fontWeight="font-medium">
+          <Button width="320px" fontWeight="font-medium" onClick={() => Router.push("/signup/signup-supervisor")}>
             Daftar sebagai Supervisor
           </Button>
         </div>
