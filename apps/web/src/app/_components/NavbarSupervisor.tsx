@@ -13,7 +13,7 @@ export default function Navbar() {
       : "button-navbar-off";
 
   const activePendamping = (): string => {
-    const pendampingRoutes = ["/cari-pendamping", "/lihat-pendamping", "/pendamping", "/supervisor"];
+    const pendampingRoutes = ["/search-supervisor", "/supervisor-detail", "/pendamping", "/supervisor"];
     const isActive = pendampingRoutes.some(route => 
       pathname === route || pathname.startsWith(route + "/")
     );
