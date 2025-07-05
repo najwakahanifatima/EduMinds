@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpModule } from '@nestjs/axios';
+import { CareerModule } from './career/career.module'
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [UserModule, AuthModule, HttpModule, CareerModule],
   controllers: [AppController],
   providers: [AppService],
 })
