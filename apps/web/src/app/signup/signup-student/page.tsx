@@ -85,7 +85,10 @@ const SignUp = () => {
         )}
         <div className="mt-12 flex justify-center">
           <form onSubmit={handleSubmit}>
-            <Button width="200px">
+            <Button 
+              width="200px"
+              type="submit"
+            >
               Lanjutkan
             </Button>
           </form>

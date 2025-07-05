@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
 import Button from '../../_components/Button';
+import { useRouter } from 'next/navigation';
 
 const careerOptions = [
     { 
@@ -18,6 +19,7 @@ const careerOptions = [
   ];
   
   const CareerRecommendationPage = () => {
+    const Router = useRouter();
     const [selectedCareer, setSelectedCareer] = useState<string | null>(null);
   
     const handleSelectCareer = (careerName: string) => {
@@ -28,7 +30,7 @@ const careerOptions = [
       if (selectedCareer) {
         localStorage.setItem('userSelectedCareer', selectedCareer);
         console.log(`Karier yang dipilih: ${selectedCareer}`);
-        alert(`Anda memilih ${selectedCareer}. Lanjutkan ke halaman berikutnya.`);
+        Router.push('/pre-assessment/supervisor');
       }
     };
   

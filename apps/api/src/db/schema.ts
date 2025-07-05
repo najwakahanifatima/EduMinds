@@ -17,6 +17,7 @@ export const users = pgTable('user', {
   email: varchar('email', { length: 255 }).unique(),
   password: varchar('password', { length: 255 }),
   picture: varchar('picture', { length: 255 }),
+  birthDate: timestamp('birth_date'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 

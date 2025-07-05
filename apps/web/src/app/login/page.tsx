@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../_components/Button';
 import Input from '../_components/Input';
-import { loginRequest } from '../../lib/api';
+import { loginRequest } from '@/lib/api';
 
 const Login = () => {
   const Router = useRouter();

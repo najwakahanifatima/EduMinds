@@ -130,7 +130,7 @@ const QuizPage = () => {
             </ul>
           </div>
          
-          <Button width="200px" bgColor="#EDCD50" onClick={() => Router.push("/user-dashboard")}>
+          <Button width="200px" bgColor="#EDCD50" onClick={() => Router.push("/pre-assessment/career-option")}>
             Lanjut
           </Button>
         </div>

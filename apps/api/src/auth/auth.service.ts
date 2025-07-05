@@ -4,6 +4,7 @@ import { db } from 'src/db/client';
 import { supervisors, users } from 'src/db/schema';
 import * as bcrypt from 'bcrypt';
 import { eq } from 'drizzle-orm';
+import { BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -44,5 +45,24 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async register({ name, email, password, birthdate }: { name: string; email: string; password: string; birthdate: string}) {
+    console.log('DEBUG AUTH SERVICE REGISTER: ', name, email, password, birthdate);
+
+    const existing = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    if (existing.length) throw new BadRequestException('Email sudah terdaftar');
+    
+    const newUser = await db.insert(users).values({
+      name,
+      email,
+      birthDate: new Date(birthdate),
+      password,
+      picture: null
+    }).returning();
+
+    console.log(newUser[0]);
+
+    return newUser[0];
   }
 }
