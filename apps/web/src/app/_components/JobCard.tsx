@@ -13,7 +13,7 @@ interface JobCardProps {
 
 export default function JobCard({ company, title, location, time, salary, path }: JobCardProps) {
   return (
-    <article className="flex w-48 h-64 flex-col rounded-lg bg-[#5254A8] p-4 text-white lg:w-56">
+    <article className="flex w-48 h-64 md:w-52 md:h-72 xl:w-64 xl:h-80 flex-col rounded-lg bg-[#5254A8] p-4 text-white">
       {/* avatar placeholder */}
       <div className="flex items-center"> 
         <div className="h-10 w-10 rounded-full bg-[#FAFAF6BF]/75" />
