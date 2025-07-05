@@ -20,7 +20,7 @@ const CareerRecommendationPage = () => {
   const handleConfirmSelection = () => {
     if (recommendedCareer) {
       localStorage.setItem('userSelectedCareer', recommendedCareer);
-      router.push('/pre-assessment/supervisor');
+      router.push('/pre-assessment/supervisor-option');
     }
   };
 

@@ -60,3 +60,29 @@ export async function getCareerRecommendation(preference: {
     throw err;
   }
 }
+
+
+/* GET SUPERVISORS */
+export interface Supervisor {
+  id: number;
+  name: string;
+  gender: string;
+  age: number;
+  experience: string;
+  avatar: string;
+}
+
+export async function getSupervisors(): Promise<Supervisor[]> {
+  console.log('DEBUG: Requesting API Get Supervisors Request')
+  const res = await fetch(`${BASE_URL}/supervisors`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  if (!res.ok) {
+    throw new Error('Gagal memuat supervisor');
+  }
+
+  return res.json();
+}
+
