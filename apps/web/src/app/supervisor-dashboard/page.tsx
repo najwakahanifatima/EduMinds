@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import NavbarSupervisor from "@/app/_components/NavbarSupervisor";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
@@ -75,6 +76,7 @@ const StudentCard = ({ stu }: { stu: Student }) => (
 );
 
 export default function SupervisorDashboard() {
+  const Router = useRouter();
   const [query, setQuery] = useState("");
 
   const filtered = students.filter((s) =>
@@ -123,7 +125,7 @@ export default function SupervisorDashboard() {
           </div>
 
           <div className="mt-4 flex justify-end">
-            <button className="text-xs font-semibold text-indigo-600 underline hover:opacity-80">
+            <button className="text-xs font-semibold text-indigo-600 underline hover:opacity-80" onClick={() => Router.push("/students")}>
               Lihat lebih banyak →
             </button>
           </div>
