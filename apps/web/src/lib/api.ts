@@ -109,3 +109,29 @@ export async function assignSupervisor(userId: number, supervisorId: number) {
     throw error;
   }
 }
+
+/* Chatbot with OpenAI */
+export async function sendMessageToAI(message: string) {
+  console.log('DEBUG: Requesting API Send Message to AI Request for ', message);
+  try {
+    const res = await fetch(`${BASE_URL}/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "AI Server Error");
+    }
+
+    const data = await res.json();
+    console.log('DEBUG: reply response ', data);
+    return data.reply;
+  } catch (err) {
+    console.error("AI Error:", err);
+    throw new Error("Terjadi kesalahan saat menghubungi AI.");
+  }
+}

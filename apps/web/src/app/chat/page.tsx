@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeftIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { sendMessageToAI } from "@/lib/api";
 
 type Thread = {
     id: string;
@@ -68,17 +69,65 @@ export default function ChatPage() {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, active]);
 
-    const send = () => {
+    const send = async () => {
         if (!input.trim()) return;
+
+        const newMessage: Msg = {
+            from: "me",
+            text: input,
+            time: new Date().toLocaleTimeString("id-ID", {
+                hour: "2-digit",
+                minute: "2-digit",
+            }),
+            read: true,
+        };
+
+        // pesan user
         setMessages((prev) => ({
-        ...prev,
-        [active.id]: [
-            ...prev[active.id],
-            { from: "me", text: input, time: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) },
-        ],
+            ...prev,
+            [active.id]: [...(prev[active.id] || []), newMessage],
         }));
+
+        const userInput = input;
         setInput("");
+
+        // kirim ke chatbot
+        if (active.id === "bot") {
+            console.log('DEBUG in FE: sending message to AI ', userInput);
+            try {
+                const replyText = await sendMessageToAI(userInput);
+                const aiReply: Msg = {
+                    from: "other",
+                    text: replyText,
+                    time: new Date().toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }),
+                };
+
+                // balasan dari AI
+                setMessages((prev) => ({
+                    ...prev,
+                    [active.id]: [...(prev[active.id] || []), aiReply],
+                }));
+            } catch (error) {
+                console.error("Gagal menghubungi AI:", error);
+                const errorReply: Msg = {
+                    from: "other",
+                    text: "Maaf, terjadi kesalahan saat menghubungi EduBot.",
+                    time: new Date().toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }),
+                };
+                setMessages((prev) => ({
+                    ...prev,
+                    [active.id]: [...(prev[active.id] || []), errorReply],
+                }));
+            }
+        }
     };
+
 
     return (
         <>
