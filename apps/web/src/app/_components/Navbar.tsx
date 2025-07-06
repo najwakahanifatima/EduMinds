@@ -29,8 +29,19 @@ export default function Navbar() {
   const careerRef = useRef<HTMLDivElement>(null);
   const pendampingRef = useRef<HTMLDivElement>(null);
 
+  const [userName, setUserName] = useState('');
+  const [careerPath, setCareerPath] = useState('');
+
   /* ── close dropdown if click outside ────────── */
   useEffect(() => {
+    const storedName = localStorage.getItem("user_name");
+    if (storedName) {
+      setUserName(storedName);
+    }
+    const savedCareer = localStorage.getItem('userSelectedCareer');
+    if (savedCareer) {
+          setCareerPath(savedCareer);
+      }
     const handler = (e: MouseEvent) => {
       if (
         careerRef.current &&
@@ -48,6 +59,8 @@ export default function Navbar() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+    
   
   return (
     <div className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur">
@@ -152,8 +165,8 @@ export default function Navbar() {
           <span className="h-6 w-px bg-gray-300" />
 
           <div className="hidden xl:text-right xl:block">
-            <p className="text-xs text-gray-500">Halo, Calon Florist!</p>
-            <p className="text-sm font-medium text-indigo-700">Grace Doe</p>
+            <p className="text-xs text-gray-500">Halo, Calon {careerPath || "Profesional"}!</p>
+            <p className="text-sm font-medium text-indigo-700">{userName || "Pengguna"}</p>
           </div>
 
           <button onClick={() => router.push("/profile")}>

@@ -91,13 +91,19 @@ const BarChart = ({ data }: BarChartProps) => {
 
 
 const UserDashboard = () => {
-  const [user, setUser] = useState({ name: 'Grace Doe' });
-  const [careerPath, setCareerPath] = useState('Floris');
+  const [user, setUser] = useState({ name: '' });
+  const [careerPath, setCareerPath] = useState('');
 
   useEffect(() => {
       const savedCareer = localStorage.getItem('userSelectedCareer');
+      const savedUserName = localStorage.getItem('user_name');
+      console.log('DEBUG in FE: saved career is ', savedCareer);
       if (savedCareer) {
           setCareerPath(savedCareer);
+      }
+      console.log('DEBUG in FE: user_name is ', savedUserName);
+      if (savedUserName) {
+        setUser({ name: savedUserName });
       }
   }, []);
 

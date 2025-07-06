@@ -39,6 +39,7 @@ const SignUp = () => {
 
       setProgressWidth(100);
       localStorage.setItem('id_user', data.id);
+      localStorage.setItem('user_name', data.name);
       console.log('DEBUG IN FE: register user', data);
 
       const params = new URLSearchParams({
