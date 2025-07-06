@@ -1,8 +1,23 @@
 "use client";
 
 import NavbarSupervisor from "@/app/_components/NavbarSupervisor";
+import { useEffect, useState, useRef } from "react";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+
+
+interface ProgressDataItem {
+  task: string;
+  score: number;
+}
+
+const progressData: ProgressDataItem[] = [
+  { task: 'Tugas 1', score: 82 },
+  { task: 'Tugas 2', score: 68 },
+  { task: 'Tugas 3', score: 95 },
+  { task: 'Tugas 4', score: 92 },
+  { task: 'Tugas 5', score: 85 },
+];
 
 const student = {
     id: 1,
@@ -12,7 +27,7 @@ const student = {
     avgScore: 85,
     competency: "Menengah",
     pie: { correct: 40, blank: 20, wrong: 40 },
-    bars: [80, 65, 100, 90, 85],
+    bars: progressData,
 };
 
 const StatCard = ({ value, label }: { value: string; label: string }) => (
@@ -21,6 +36,61 @@ const StatCard = ({ value, label }: { value: string; label: string }) => (
         <p className="text-xs">{label}</p>
     </div>
 );
+
+
+interface BarChartProps {
+  data: ProgressDataItem[];
+}
+
+const BarChart = ({ data }: BarChartProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the element is visible
+      }
+    );
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+
+    return () => {
+      if (chartRef.current) {
+        observer.unobserve(chartRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={chartRef} className="bg-white border border-gray-200 rounded-2xl p-6">
+      <div className="flex h-64 items-end justify-around">
+        {data.map((item, index) => (
+          <div key={index} className="flex flex-col items-center flex-1 mx-2">
+            <div 
+              className="w-12 bg-[#EDCD50] mb-2 transition-all duration-1000 ease-out"
+              style={{ 
+                height: isVisible ? `${(item.score / 100) * 200}px` : '0px',
+                transitionDelay: `${index * 200}ms`
+              }}
+            ></div>
+            <p className="text-sm text-gray-600 text-center">{item.task}</p>
+            <p className="text-xs text-gray-500 font-semibold">{item.score}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function StudentProgressPage() {
   const router = useRouter();
@@ -85,30 +155,12 @@ export default function StudentProgressPage() {
           </div>
         </section>
         
-        <section className="mt-14">
-          <h2 className="mb-5 text-lg font-semibold">Perkembangan Belajar</h2>
-
-          <div className="rounded-2xl border-2 border-[#1E1E1E] p-6">
-            {/* wadah grafik */}
-            <div className="flex h-56 items-end justify-around">
-              {student.bars.map((val, i) => (
-                <div           /* wrapper tiap kolom: tinggi penuh */
-                  key={i}
-                  className="flex h-full flex-col items-center justify-end"
-                >
-                  {/* batang */}
-                  <div
-                    className="w-10 rounded-t bg-[#EDCD50] border border-[#1E1E1E]"
-                    /* gunakan persen dari tinggi container */
-                    style={{ height: `${val}%` }}
-                  />
-                  <span className="mt-2 text-xs">{`Tugas ${i + 1}`}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-7">
+                Perkembangan belajar kamu
+            </h2>
+            <BarChart data={progressData} />
         </section>
-
       </main>
     </div>
   );

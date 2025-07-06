@@ -112,7 +112,7 @@ const UserDashboard = () => {
       { step: 1, title: 'Mempelajari skill untuk pekerjaan' },
       { step: 2, title: 'Mendapatkan sertifikat dari ujian sertifikasi' },
       { step: 3, title: 'Melamar pekerjaan yang sesuai' }
-  ];
+  ]; 
 
   const progressData: ProgressDataItem[] = [
       { task: 'Tugas 1', score: 82 },
