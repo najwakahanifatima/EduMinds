@@ -7,9 +7,10 @@ import { HttpModule } from '@nestjs/axios';
 import { CareerModule } from './career/career.module'
 import { SupervisorModule } from './supervisor/supervisor.module'
 import { AiModule } from './ai/ai.module';
+import { JobModule } from './job/job.module';
 
 @Module({
-  imports: [UserModule, AuthModule, HttpModule, CareerModule, SupervisorModule, AiModule],
+  imports: [UserModule, AuthModule, HttpModule, CareerModule, SupervisorModule, AiModule, JobModule],
   controllers: [AppController],
   providers: [AppService],
 })

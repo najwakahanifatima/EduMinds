@@ -1,40 +1,58 @@
-/* app/career/jobs/page.tsx */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/app/_components/Navbar";
 import JobCard from "@/app/_components/JobCard";
-import { FunnelIcon, MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/24/solid";
+import { getJobs } from "@/lib/api";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 type Job = {
   id: number;
-  company: string;
-  title: string;
-  location: string;
-  time: string;
-  salary: string;
+  imageUrl: string | null;
+  company: string | null;
+  title: string | null;
+  location: string | null;
+  time: string | null;
+  salary: string | null;
+  description: string | null;
+  tasks: string[] | null;
+  requirements: string[] | null;
 };
-const JOBS: Job[] = Array.from({ length: 12 }).map((_, i) => ({
-  id: i,
-  company: "PT Keren",
-  title: ["Pengrajin Bunga", "Penata Tanaman", "Penghias Acara"][i % 3],
-  location: ["Bandung", "Bekasi", "Jakarta"][i % 3],
-  time: `${(i % 3) + 3} Bulan`,
-  salary: "Rp 5.000.000",
-}));
+
 const LOCATIONS = ["Semua Lokasi", "Bandung", "Bekasi", "Jakarta"];
 
 export default function JobExplorePage() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // State untuk filter
   const [query, setQuery] = useState("");
   const [loc, setLoc] = useState(LOCATIONS[0]);
-  const [showOnlyTop, setShowOnlyTop] = useState(false);
+  
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getJobs(query, loc);
+        setJobs(data);
+      } catch (error) {
+        console.error("Failed to fetch jobs:", error);
+        setJobs([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const filtered = JOBS.filter(
-    (j) =>
-      (loc === LOCATIONS[0] || j.location === loc) &&
-      (!query || j.title.toLowerCase().includes(query.toLowerCase())) &&
-      (!showOnlyTop || j.id < 6)
-  );
+    // Debounce untuk menunda eksekusi fetch selama 500ms setelah user berhenti mengetik
+    const handler = setTimeout(() => {
+        fetchJobs();
+    }, 500);
+
+    // Membersihkan timeout jika user mengetik lagi sebelum 500ms tercapai
+    return () => {
+        clearTimeout(handler);
+    };
+  }, [query, loc]);
 
   return (
     <>
@@ -42,12 +60,13 @@ export default function JobExplorePage() {
       <main className="mx-auto w-full max-w-7xl px-6 py-8">
         <h1 className="mb-8 text-center text-3xl font-semibold">Cari Pekerjaan</h1>
 
+        {/* Bagian Filter */}
         <div className="mb-10 flex flex-wrap gap-4 justify-center">
           <div className="relative">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cari pekerjaan..."
+              placeholder="Cari judul pekerjaan..."
               className="w-72 rounded-xl border bg-[#DCDDFF] py-2 pl-4 pr-9 text-sm outline-none"
             />
             <MagnifyingGlassIcon className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-600" />
@@ -63,35 +82,29 @@ export default function JobExplorePage() {
                 <option key={l}>{l}</option>
               ))}
             </select>
-            <img src="/dropdown.png" className="absolute right-3 top-1/2 h-2 w-2 -translate-y-1/2 text-gray-600" />
+            <img alt="dropdown-icon" src="/dropdown.png" className="absolute right-3 top-1/2 h-2 w-2 -translate-y-1/2 text-gray-600" />
           </div>
-
-          <button
-            onClick={() => setShowOnlyTop((s) => !s)}
-            className={`flex items-center gap-1 rounded-xl border px-4 py-2 text-sm font-semibold ${
-              showOnlyTop ? "bg-[#EDCD50]" : "bg-white"
-            }`}
-          >
-            Filter <img src="/filter.png" className="h-3 w-3" />
-          </button>
         </div>
 
-        {filtered.length ? (
-          <div className="md:mx-2 lg:mx-16 grid gap-8 grid-cols-2 sm:grid-cols-3 justify-items-center">
-            {filtered.map((j) => (
+        {/* Bagian Daftar Pekerjaan */}
+        {isLoading ? (
+            <p className="text-center text-gray-500">Memuat lowongan...</p>
+        ) : jobs.length > 0 ? (
+          <div className="md:mx-2 lg:mx-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+            {jobs.map((j) => (
               <JobCard
                 key={j.id}
-                company={j.company}
-                title={j.title}
-                location={j.location}
-                time={j.time}
-                salary={j.salary}
-                path="#"
+                company={j.company ?? "Perusahaan"}
+                title={j.title ?? "Tanpa Judul"}
+                location={j.location ?? "Remote"}
+                time={j.time ?? "Penuh Waktu"}
+                salary={j.salary ?? "N/A"}
+                path={`/career/jobs/${j.id}`}
               />
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500">Tidak ada lowongan sesuai pencarian.</p>
+          <p className="text-center text-gray-500">Tidak ada lowongan yang sesuai dengan pencarian Anda.</p>
         )}
       </main>
     </>
