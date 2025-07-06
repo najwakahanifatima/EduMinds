@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { and, eq, ilike, SQL } from 'drizzle-orm';
 import { db } from 'src/db/client';
 import { jobs } from 'src/db/schema';
@@ -22,5 +22,15 @@ export class JobService {
       .where(conditions.length ? and(...conditions) : undefined);
      
     return result;
+  }
+  async findOne(id: number) {
+    const job = await db.query.jobs.findFirst({
+      where: eq(jobs.id, id),
+    });
+
+    if (!job) {
+      throw new NotFoundException(`Pekerjaan dengan ID ${id} tidak ditemukan`);
+    }
+    return job;
   }
 }

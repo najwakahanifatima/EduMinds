@@ -25,7 +25,6 @@ export default function JobExplorePage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // State untuk filter
   const [query, setQuery] = useState("");
   const [loc, setLoc] = useState(LOCATIONS[0]);
   
@@ -43,12 +42,10 @@ export default function JobExplorePage() {
       }
     };
 
-    // Debounce untuk menunda eksekusi fetch selama 500ms setelah user berhenti mengetik
     const handler = setTimeout(() => {
         fetchJobs();
     }, 500);
 
-    // Membersihkan timeout jika user mengetik lagi sebelum 500ms tercapai
     return () => {
         clearTimeout(handler);
     };
@@ -60,7 +57,6 @@ export default function JobExplorePage() {
       <main className="mx-auto w-full max-w-7xl px-6 py-8">
         <h1 className="mb-8 text-center text-3xl font-semibold">Cari Pekerjaan</h1>
 
-        {/* Bagian Filter */}
         <div className="mb-10 flex flex-wrap gap-4 justify-center">
           <div className="relative">
             <input
@@ -86,7 +82,6 @@ export default function JobExplorePage() {
           </div>
         </div>
 
-        {/* Bagian Daftar Pekerjaan */}
         {isLoading ? (
             <p className="text-center text-gray-500">Memuat lowongan...</p>
         ) : jobs.length > 0 ? (
@@ -94,6 +89,7 @@ export default function JobExplorePage() {
             {jobs.map((j) => (
               <JobCard
                 key={j.id}
+                imageUrl={j.imageUrl}
                 company={j.company ?? "Perusahaan"}
                 title={j.title ?? "Tanpa Judul"}
                 location={j.location ?? "Remote"}

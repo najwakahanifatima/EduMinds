@@ -159,3 +159,15 @@ export async function getJobs(title?: string, location?: string) {
 
   return res.json();
 }
+
+export async function getJobById(id: string | number) {
+  console.log(`DEBUG: Requesting API Get Job By ID for ${id}`);
+  
+  const res = await fetch(`${BASE_URL}/jobs/${id}`);
+
+  if (!res.ok) {
+    throw new Error('Gagal memuat detail pekerjaan');
+  }
+
+  return res.json();
+}
