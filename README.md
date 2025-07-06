@@ -62,6 +62,9 @@ apps/
 │       └── ...
 ```
 
+## 💻 Struktur Basis Data
+![EduMinds MVP](https://github.com/user-attachments/assets/d8a5f4ea-3c26-4a65-85c9-ef4acb779ea0)
+
 
 ## 🚀 Cara Menjalankan
 
