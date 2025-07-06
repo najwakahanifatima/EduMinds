@@ -91,13 +91,19 @@ const BarChart = ({ data }: BarChartProps) => {
 
 
 const UserDashboard = () => {
-  const [user, setUser] = useState({ name: 'Grace Doe' });
-  const [careerPath, setCareerPath] = useState('Floris');
+  const [user, setUser] = useState({ name: '' });
+  const [careerPath, setCareerPath] = useState('');
 
   useEffect(() => {
       const savedCareer = localStorage.getItem('userSelectedCareer');
+      const savedUserName = localStorage.getItem('user_name');
+      console.log('DEBUG in FE: saved career is ', savedCareer);
       if (savedCareer) {
           setCareerPath(savedCareer);
+      }
+      console.log('DEBUG in FE: user_name is ', savedUserName);
+      if (savedUserName) {
+        setUser({ name: savedUserName });
       }
   }, []);
 
@@ -112,7 +118,7 @@ const UserDashboard = () => {
       { step: 1, title: 'Mempelajari skill untuk pekerjaan' },
       { step: 2, title: 'Mendapatkan sertifikat dari ujian sertifikasi' },
       { step: 3, title: 'Melamar pekerjaan yang sesuai' }
-  ];
+  ]; 
 
   const progressData: ProgressDataItem[] = [
       { task: 'Tugas 1', score: 82 },

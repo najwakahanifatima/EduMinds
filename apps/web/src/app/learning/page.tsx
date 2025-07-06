@@ -25,7 +25,7 @@ export default function LearningPage() {
           <div className="flex items-center gap-4">
             {/* icon */}
             <img
-              src="./floris.png"
+              src="./Florist.png"
               alt="bouquet"
               className="h-10 w-10"
             />

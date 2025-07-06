@@ -13,7 +13,7 @@ export default function Navbar() {
       : "button-navbar-off";
 
   const activePendamping = (): string => {
-    const pendampingRoutes = ["/cari-pendamping", "/lihat-pendamping", "/pendamping", "/supervisor"];
+    const pendampingRoutes = ["/search-supervisor", "/supervisor-detail", "/pendamping", "/supervisor"];
     const isActive = pendampingRoutes.some(route => 
       pathname === route || pathname.startsWith(route + "/")
     );
@@ -57,7 +57,7 @@ export default function Navbar() {
             <img src="/logo-cropped.png" alt="EduMinds" className="h-4 w-auto scale-[1.05] sm:h-5 sm:scale-[1.15] md:h-6 md:scale-100 lg:h-7 origin-left"/>
           </button>
 
-          <button onClick={() => router.push("/supervisor-dashboard")} className={`${activeNav("/supervisor-dashboard")} hidden md:inline`}>
+          <button onClick={() => router.push("/supervisor")} className={`${activeNav("/supervisor")} hidden md:inline`}>
             Beranda
           </button>
 
@@ -96,7 +96,7 @@ export default function Navbar() {
             <p className="text-sm font-medium text-indigo-700">Grace Doe</p>
           </div>
 
-          <button onClick={() => router.push("/profile")}>
+          <button onClick={() => router.push("/supervisor-profile")}>
             <img
               src="/dummy-profile.png"
               alt="profile"

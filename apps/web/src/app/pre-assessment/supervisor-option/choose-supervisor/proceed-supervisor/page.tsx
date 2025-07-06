@@ -2,6 +2,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Button from '../../../../_components/Button';
+import { assignSupervisor } from '@/lib/api';
 
 interface Supervisor {
     id: number;
@@ -12,34 +13,48 @@ interface Supervisor {
     avatar: string;
 }
 
-const supervisorData: Supervisor[] = [
-    { id: 1, name: 'Jane Doe', gender: 'Perempuan', age: 28, experience: 'Menjadi floris selama 5 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JD' },
-    { id: 2, name: 'John Smith', gender: 'Laki-laki', age: 32, experience: 'Koki profesional selama 8 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=JS' },
-    { id: 3, name: 'Elijah Doe', gender: 'Laki-laki', age: 25, experience: 'Barista dengan 3 tahun pengalaman', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=ED' },
-    { id: 4, name: 'Grace Smith', gender: 'Perempuan', age: 35, experience: 'Manager toko bunga selama 10 tahun', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=GS' },
-    { id: 5, name: 'Bob Mateo', gender: 'Laki-laki', age: 29, experience: 'Spesialis kopi dan latte art', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=BM' },
-    { id: 6, name: 'Stella Hunter', gender: 'Perempuan', age: 22, experience: 'Asisten koki di restoran ternama', avatar: 'https://placehold.co/100x100/E9F7F0/333?text=SH' },
-];
-
 const ProceedSupervisorPage = () => {
     const Router = useRouter();
-    const searchParams = useSearchParams();
     const [selectedSupervisor, setSelectedSupervisor] = useState<Supervisor | null>(null);
 
     useEffect(() => {
-        const supervisorId = searchParams.get('id');
-
-        if (supervisorId) {
-            const supervisor = supervisorData.find(s => s.id === parseInt(supervisorId, 10));
-            if (supervisor) {
-                setSelectedSupervisor(supervisor);
+        const stored = localStorage.getItem('selectedSupervisor');
+        if (stored) {
+            try {
+            const supervisor = JSON.parse(stored) as Supervisor;
+            setSelectedSupervisor(supervisor);
+            } catch (err) {
+            console.error('Gagal parse data supervisor:', err);
             }
         }
-    }, [searchParams]);
+    }, []);
+
 
     const handleBack = () => {
         Router.back();
     };
+
+    const handleContinue = async () => {
+        if (!selectedSupervisor) return;
+
+        try {
+            const userIdStr = localStorage.getItem('id_user');
+            const userId = userIdStr ? parseInt(userIdStr, 10) : null;
+
+            if (userId !== null) {
+                await assignSupervisor(userId, selectedSupervisor.id);
+            } else {
+                console.error('User ID is missing in localStorage');
+            }
+
+            localStorage.removeItem('selectedSupervisor');
+            Router.push('/user-dashboard');
+        } catch (err) {
+            console.error('Gagal menyimpan supervising:', err);
+            alert('Terjadi kesalahan saat menyimpan pendamping.');
+        }
+    };
+
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans p-4">
@@ -74,7 +89,7 @@ const ProceedSupervisorPage = () => {
                         <div className="flex gap-4">
                             <Button 
                                 width="220px" 
-                                onClick={() => Router.push("/user-dashboard")}
+                                onClick={handleContinue}
                             >
                                 Lanjut
                             </Button>

@@ -126,7 +126,7 @@ const SupervisorCard = ({ supervisor }: { supervisor: SupervisorData | null }) =
           ) : (
             <div className="ml-12">
               <h3 className="text-xl md:text-2xl font-semibold mb-10">Kamu belum punya pendamping...</h3>
-              <Button onClick={() => Router.push("/cari-pendamping")} bgColor="#B3EBCE" width="90%">
+              <Button onClick={() => Router.push("/search-supervisor")} bgColor="#B3EBCE" width="90%">
                 <p>Cari Pendamping</p>
                 <img src="search.png" className="w-5 h-5" />
               </Button>
@@ -196,7 +196,7 @@ const FeedbackCard = ({ feedback }: { feedback: FeedbackData }) => {
 };
 
 
-const App = () => {
+const SupervisorDetail = () => {
   const [currentSupervisor] = useState<SupervisorData | null>(supervisorData);
   const [showAllFeedback, setShowAllFeedback] = useState(false);
   const Router = useRouter();
@@ -236,4 +236,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default SupervisorDetail;

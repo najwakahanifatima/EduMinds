@@ -3,33 +3,36 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../_components/Button';
 import Input from '../_components/Input';
+import { loginRequest } from '@/lib/api';
 
 const Login = () => {
   const Router = useRouter();
   const [alamatEmail, setAlamatEmail] = useState('');
   const [kataSandi, setKataSandi] = useState('');
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handlePelajarSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async (role: 'user' | 'supervisor') => {
     if (!alamatEmail || !kataSandi) {
       setShowError(true);
+      setErrorMessage('Harap isi semua field');
       return;
     }
-    setShowError(false);
-    console.log('Masuk sebagai pelajar diklik');
-    Router.push('/user-dashboard');
-  };
 
-  const handleSupervisorSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!alamatEmail || !kataSandi) {
+    try {
+      const { access_token, id_user } = await loginRequest(role, alamatEmail, kataSandi);
+      localStorage.setItem('token', access_token);
+      localStorage.setItem('id_user', id_user);
+
+      if (role === 'user') {
+        Router.push('/user-dashboard');
+      } else {
+        Router.push('/supervisor-dashboard');
+      }
+    } catch (err: any) {
       setShowError(true);
-      return;
+      setErrorMessage(err.message || 'Login gagal');
     }
-    setShowError(false);
-    console.log('Masuk sebagai supervisor diklik');
-    Router.push('/supervisor-dashboard');
   };
 
   return (
@@ -79,31 +82,24 @@ const Login = () => {
             </div>
           )}
           <div className="space-y-5 mt-12">
-            <form
-              onSubmit={handlePelajarSubmit}
-              className="space-y-5 mt-12"
-            >
               <Button
                 type="submit"
                 bgColor="#EDCD50"
                 width="full"
                 fontWeight="font-medium"
+                onClick={() => handleLogin('user')}
               >
                 Masuk sebagai Pelajar
               </Button>
-            </form>
-            <form
-              onSubmit={handleSupervisorSubmit}
-            >
               <Button
                 type="submit"
                 bgColor="#B3EBCE"
                 width="full"
                 fontWeight="font-medium"
+                onClick={() => handleLogin('supervisor')}
               >
                 Masuk sebagai Supervisor
               </Button>
-            </form>
           </div>
           <div className="text-right">
             <a

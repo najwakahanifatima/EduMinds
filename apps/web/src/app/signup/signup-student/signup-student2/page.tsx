@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../../../_components/Button';
 import Input from '../../../_components/Input';
+import { registerUser } from '@/lib/api';
 
 const SignUp = () => {
   const Router = useRouter();
@@ -13,16 +14,47 @@ const SignUp = () => {
   const [showError, setShowError] = useState(false);
   const [progressWidth, setProgressWidth] = useState(100);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!kataSandi || !ulangiKataSandi || (kataSandi !== ulangiKataSandi)) {
+    console.log('DEBUG: clicking submit register');
+
+    if (!kataSandi || !ulangiKataSandi || kataSandi !== ulangiKataSandi) {
       setShowError(true);
       return;
     }
+
     setShowError(false);
-   
-    console.log('Buat Akun diklik');
-    Router.push("/signup/signup-student/signup-student3");
+
+    const nama = searchParams.get('nama') || '';
+    const email = searchParams.get('email') || '';
+    const tanggal = searchParams.get('tanggal') || '';
+
+    try {
+      const data = await registerUser({
+        name: nama,
+        email: email,
+        password: kataSandi,
+        birthdate: tanggal,
+      });
+
+      setProgressWidth(100);
+      localStorage.setItem('id_user', data.id);
+      localStorage.setItem('user_name', data.name);
+      console.log('DEBUG IN FE: register user', data);
+
+      const params = new URLSearchParams({
+        nama,
+        email,
+        password: kataSandi,
+        tanggal,
+      });
+
+      console.log('Buat Akun diklik');
+      Router.push("/pre-assessment");
+    } catch (err) {
+      console.error('Gagal mendaftar:', err);
+      setShowError(true);
+    }
   };
 
   const handleBack = (e: React.FormEvent) => {
@@ -89,7 +121,7 @@ const SignUp = () => {
             </Button>
           </form>
           <form onSubmit={handleSubmit}>
-            <Button bgColor="#B3EBCE" width="225px">
+            <Button bgColor="#B3EBCE" width="225px" type="submit">
               Buat Akun
             </Button>
           </form>

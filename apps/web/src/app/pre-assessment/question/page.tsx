@@ -1,67 +1,74 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '../../_components/Button';
+import { getCareerRecommendation } from '@/lib/api';
 
 interface Answers {
   [key: number]: string[];
 }
 
-// INI MASIH DUMMY
 const quizData = [
-{
+  {
     id: 1,
-    questionText: 'Apa yang biasa dipakai untuk mengirim pesan ke teman kerja?',
-    options: ['Kertas', 'Slack', 'TV', 'Kalkulator'],
+    questionText: 'Apakah kamu suka merawat tanaman atau berkebun?',
+    options: ['Suka', 'Tidak suka'],
     type: 'single',
-    correctAnswer: 'Slack',
-},
-{
+    category: 'Tanaman',
+  },
+  {
     id: 2,
-    questionText: 'Pilih semua yang bisa digunakan untuk bekerja di komputer.',
-    options: ['Mouse', 'Keyboard', 'Kipas angin', 'Monitor'],
-    type: 'multiple',
-    correctAnswer: ['Mouse', 'Keyboard', 'Monitor'],
-},
-{
+    questionText: 'Apakah kamu suka berbicara dengan orang lain atau melayani pelanggan?',
+    options: ['Suka', 'Tidak suka'],
+    type: 'single',
+    category: 'Interaksi',
+  },
+  {
     id: 3,
-    questionText: 'Apa yang harus kita lakukan jika tidak paham tugas?',
-    options: [
-    'Diam saja',
-    'Tanya ke teman atau atasan',
-    'Pulang saja',
-    'Lanjut kerja asal-asalan',
-    ],
+    questionText: 'Apakah kamu suka memasak atau menyiapkan makanan?',
+    options: ['Suka', 'Tidak suka'],
     type: 'single',
-    correctAnswer: 'Tanya ke teman atau atasan',
-},
-{
+    category: 'Masak',
+  },
+  {
     id: 4,
-    questionText: 'Apa itu “deadline”?',
-    options: [
-    'Waktu istirahat',
-    'Waktu selesai tugas',
-    'Nama makanan',
-    'Jam pulang kerja',
-    ],
+    questionText: 'Apakah kamu suka menjaga kebersihan dan kerapihan?',
+    options: ['Suka', 'Tidak suka'],
     type: 'single',
-    correctAnswer: 'Waktu selesai tugas',
-},
-{
+    category: 'Kebersihan',
+  },
+  {
     id: 5,
-    questionText: 'Pilih semua hal yang menunjukkan sikap baik di tempat kerja.',
-    options: ['Datang tepat waktu', 'Marah-marah', 'Membantu teman', 'Tidur di meja'],
-    type: 'multiple',
-    correctAnswer: ['Datang tepat waktu', 'Membantu teman'],
-},
+    questionText: 'Apakah kamu termotivasi oleh uang atau suka mengelola uang?',
+    options: ['Suka', 'Tidak suka'],
+    type: 'single',
+    category: 'Uang',
+  },
+  {
+    id: 6,
+    questionText: 'Apakah kamu orang yang tenang dan bisa fokus dalam pekerjaan?',
+    options: ['Suka', 'Tidak suka'],
+    type: 'single',
+    category: 'Tenang',
+  },
 ];
-  
+
+const getScore = (answer: string): number => {
+  switch (answer) {
+    case 'Suka': return 1;
+    case 'Tidak suka': return 0;
+    default: return 0;
+  }
+};
+
 const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [allAnswers, setAllAnswers] = useState<Answers>({});
   const [isFinished, setIsFinished] = useState(false);
   const [progressWidth, setProgressWidth] = useState(0);
+  const [recommendedCareer, setRecommendedCareer] = useState<string | null>(null);
+  const [recommendedImage, setRecommendedImage] = useState<string | null>(null);
   const Router = useRouter();
 
   const totalQuestions = quizData.length;
@@ -73,20 +80,32 @@ const QuizPage = () => {
     setProgressWidth(newProgress);
   }, [currentQuestionIndex, totalQuestions]);
 
-  const handleOptionSelect = (option: string) => {
-    const newAnswers: Answers = { ...allAnswers };
-    let currentSelection = allAnswers[currentQuestionIndex] || [];
+  useEffect(() => {
+  if (isFinished) {
+    const preference: Record<string, number> = {};
+    quizData.forEach((q, i) => {
+      preference[q.category] = getScore(allAnswers[i]?.[0] || '');
+    });
 
-    if (currentQuestion.type === 'single') {
-      currentSelection = [option];
-    } else if (currentQuestion.type === 'multiple') {
-      if (currentSelection.includes(option)) {
-        currentSelection = currentSelection.filter((item) => item !== option);
-      } else {
-        currentSelection = [...currentSelection, option];
-      }
-    }
-    newAnswers[currentQuestionIndex] = currentSelection;
+    getCareerRecommendation(preference as any)
+    .then((res) => {
+      console.log('DEBUG FULL RESPONSE:', res);
+      const { career, image } = res;
+      setRecommendedCareer(career);       
+      setRecommendedImage(image);
+      localStorage.setItem('recommendedCareer', career ?? ''); 
+      localStorage.setItem('recommendedCareerImage', image ?? '');
+    })
+    .catch(() => {
+      setRecommendedCareer('Tidak diketahui');
+    });
+
+  }
+}, [isFinished]);
+
+  const handleOptionSelect = (option: string) => {
+    const newAnswers = { ...allAnswers };
+    newAnswers[currentQuestionIndex] = [option];
     setAllAnswers(newAnswers);
   };
 
@@ -107,30 +126,20 @@ const QuizPage = () => {
   if (isFinished) {
     return (
       <div className="h-screen m-2 overflow-hidden flex flex-col">
-        <div className="w-full bg-[#1C245B] h-1.5 rounded-full overflow-hidden flex-shrink-0">
-        </div>
+        <div className="w-full bg-[#1C245B] h-1.5 rounded-full overflow-hidden flex-shrink-0" />
         <div className="max-w-xl mx-auto px-4 flex flex-col items-center justify-center flex-1">
-          <h1 className="font-semibold text-3xl text-center mb-5 text-[#1E1E1E]">
-            Selamat!
-          </h1>
-          <p className="text-lg font-medium text-gray-700 mb-8 text-center">Tes awal kamu sudah selesai. Hasilnya adalah...</p>
-         
-          <div className="bg-[#6669E3] border-2 border-gray-700 text-white font-semibold py-4 px-6 rounded-full mb-6 w-full h-14 max-w-md flex items-center justify-center">
-            <span className="text-2xl mr-4">🏆</span>
-            <span className="text-xl">KAMU TERAMPIL</span>
-          </div>
-         
-          <div className="bg-[#dddeff] text-left py-6 px-10 border-2 border-[#5f61d6] rounded-xl w-full max-w-md mb-8">
-            <h3 className="text-[#1C245B] font-semibold text-md mb-4 text-center">Kamu hebat dalam:</h3>
-            <ul className="space-y-2 text-[#1C245B]">
-              <li>• Menggambar dan mewarnai</li>
-              <li>• Memperbaiki barang</li>
-              <li>• Menyusun puzzle</li>
-              <li>• Membuat kerajinan tangan</li>
-            </ul>
-          </div>
-         
-          <Button width="200px" bgColor="#EDCD50" onClick={() => Router.push("/user-dashboard")}>
+          <h1 className="font-semibold text-3xl text-center mb-5 text-[#1E1E1E]">Selamat!</h1>
+          <p className="text-lg font-medium text-gray-700 mb-8 text-center">
+            Tes awal kamu sudah selesai.
+          </p>
+
+            <p className="text-gray-500 text-center mb-6">Lanjut untuk melihat rekomendasi karir.</p>
+
+          <Button
+            width="200px"
+            bgColor="#EDCD50"
+            onClick={() => Router.push('/pre-assessment/career-option')}
+          >
             Lanjut
           </Button>
         </div>
@@ -157,7 +166,7 @@ const QuizPage = () => {
             <h1 className="font-semibold text-2xl md:text-3xl text-center mb-12 text-[#1E1E1E]">
               {currentQuestion.questionText}
             </h1>
-            
+
             <div className="space-y-4">
               {currentQuestion.options.map((option, index) => {
                 const isSelected = currentAnswers.includes(option);
@@ -167,9 +176,10 @@ const QuizPage = () => {
                     onClick={() => handleOptionSelect(option)}
                     className={`
                       w-full h-12 p-4 border rounded-lg text-center cursor-pointer transition-all duration-200 flex items-center justify-center
-                      ${isSelected 
-                        ? 'bg-[#E9FFF3] border-2 border-[#59a87e] text-[#234e38]' 
-                        : 'bg-white border border-gray-400 hover:bg-gray-100 hover:border-gray-400'
+                      ${
+                        isSelected
+                          ? 'bg-[#E9FFF3] border-2 border-[#59a87e] text-[#234e38]'
+                          : 'bg-white border border-gray-400 hover:bg-gray-100 hover:border-gray-400'
                       }
                     `}
                   >
@@ -181,21 +191,21 @@ const QuizPage = () => {
 
             <div className="mt-12 flex justify-center items-center space-x-8">
               <Button
-                  onClick={handlePreviousQuestion}
-                  bgColor="#EDCD50"
-                  width="175px"
-                  disabled={currentQuestionIndex === 0}
+                onClick={handlePreviousQuestion}
+                bgColor="#EDCD50"
+                width="175px"
+                disabled={currentQuestionIndex === 0}
               >
-                  Kembali
+                Kembali
               </Button>
-            
+
               <Button
-                  onClick={handleNextQuestion}
-                  bgColor="#B3EBCE"
-                  width="175px"
-                  disabled={currentAnswers.length === 0}
+                onClick={handleNextQuestion}
+                bgColor="#B3EBCE"
+                width="175px"
+                disabled={currentAnswers.length === 0}
               >
-                  {currentQuestionIndex === totalQuestions - 1 ? 'Selesai' : 'Lanjut'}
+                {currentQuestionIndex === totalQuestions - 1 ? 'Selesai' : 'Lanjut'}
               </Button>
             </div>
           </>
