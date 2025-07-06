@@ -50,7 +50,6 @@ export default function SupervisorDashboard() {
       <NavbarSupervisor />
 
       <main className="mx-auto w-full max-w-6xl px-4 md:px-10 lg:px-20 py-10">
-        {/* ── Header Ungu ───────────────────── */}
         <section className="rounded-3xl border-2 border-[#1E1E1E] bg-[#3D3FA0] p-8 text-white shadow-[0px_2px_0_rgba(30,30,30,1)]">
           <h1 className="text-xl md:text-2xl font-semibold">
             Selamat Datang Jane Doe!
@@ -63,7 +62,6 @@ export default function SupervisorDashboard() {
           <EventCard event={nextEvent} />
         </section>
 
-        {/* ── List Pelajar ──────────────────── */}
         <section className="mt-14">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Daftar Pelajar</h2>
