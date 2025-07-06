@@ -40,14 +40,8 @@ const initialMsgs: Record<string, Msg[]> = {
     bot: [
         {
         from: "other",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        text: "Hai! Apa yang ingin kamu tanyakan?",
         time: "15:36",
-        },
-        {
-        from: "me",
-        text: "Hai edubot, kasih saya satu kalimat lorem ipsum!",
-        time: "15:38",
-        read: true,
         },
     ],
     jane: [
