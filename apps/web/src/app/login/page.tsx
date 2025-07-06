@@ -27,7 +27,7 @@ const Login = () => {
       if (role === 'user') {
         Router.push('/user-dashboard');
       } else {
-        Router.push('/supervisor-dashboard');
+        Router.push('/supervisor');
       }
     } catch (err: any) {
       setShowError(true);
