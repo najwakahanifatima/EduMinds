@@ -66,6 +66,17 @@ apps/
 ![EduMinds MVP](https://github.com/user-attachments/assets/d8a5f4ea-3c26-4a65-85c9-ef4acb779ea0)
 
 
+## 📦 Install Dependensi
+
+### 🔧 Backend (NestJS & FastAPI)
+
+```bash
+npm install @supabase/ssr
+npm install @google/generative-ai
+npm install @nestjs/jwt
+```
+
+
 ## 🚀 Cara Menjalankan
 
 ### ML Service
