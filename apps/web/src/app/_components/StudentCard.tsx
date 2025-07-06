@@ -38,7 +38,7 @@ export default function StudentCard({ stu }: { stu: Student }) {
         </button>
 
         <button
-          onClick={() => router.push(`/supervisor/tugas`)}
+          onClick={() => router.push(`/learning/task/1`)}
           className="rounded-lg bg-[#BFC1FF] border border-[#1E1E1E] py-1 text-xs font-medium text-[#1E1E1E] hover:scale-105"
         >
           Lihat Detail Tugas

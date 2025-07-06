@@ -74,7 +74,7 @@ export default function SupervisorDashboard() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cari pelajar..."
-                className="w-56 rounded-xl border bg-[#DCDDFF] py-1.5 pl-4 pr-9 text-sm outline-none focus:ring-2 focus:ring-indigo-600"
+                className="w-56 rounded-xl border bg-[#DCDDFF] py-1.5 pl-4 pr-9 text-sm outline-none focus:ring-1 focus:ring-indigo-600"
               />
               <MagnifyingGlassIcon className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-600" />
             </div>
