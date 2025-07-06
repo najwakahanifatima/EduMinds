@@ -135,3 +135,39 @@ export async function sendMessageToAI(message: string) {
     throw new Error("Terjadi kesalahan saat menghubungi AI.");
   }
 }
+
+/* GET JOBS */
+export async function getJobs(title?: string, location?: string) {
+  console.log('DEBUG: Requesting API Get Jobs Request');
+  
+  const params = new URLSearchParams();
+  if (title) {
+    params.append("title", title);
+  }
+  if (location && location !== 'Semua Lokasi') {
+    params.append("location", location);
+  }
+
+  const res = await fetch(`${BASE_URL}/jobs?${params.toString()}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  if (!res.ok) {
+    throw new Error('Gagal memuat daftar pekerjaan');
+  }
+
+  return res.json();
+}
+
+export async function getJobById(id: string | number) {
+  console.log(`DEBUG: Requesting API Get Job By ID for ${id}`);
+  
+  const res = await fetch(`${BASE_URL}/jobs/${id}`);
+
+  if (!res.ok) {
+    throw new Error('Gagal memuat detail pekerjaan');
+  }
+
+  return res.json();
+}

@@ -1,8 +1,11 @@
-/* app/_components/JobCard.tsx */
 "use client";
+import Image from 'next/image';
+import Link from 'next/link';
 import React from "react";
+import Button from './Button';
 
 interface JobCardProps {
+  imageUrl: string | null;
   company: string;
   title: string;
   location: string;
@@ -11,41 +14,50 @@ interface JobCardProps {
   path: string;
 }
 
-export default function JobCard({ company, title, location, time, salary, path }: JobCardProps) {
+export default function JobCard({ imageUrl, company, title, location, time, salary, path }: JobCardProps) {
   return (
-    <article className="flex w-48 h-64 md:w-52 md:h-72 xl:w-64 xl:h-80 flex-col rounded-lg bg-[#5254A8] p-4 text-white">
-      {/* avatar placeholder */}
-      <div className="flex items-center"> 
-        <div className="h-10 w-10 rounded-full bg-[#FAFAF6BF]/75" />
+    <Link href={path} className="flex w-48 h-64 flex-col rounded-lg bg-[#5254A8] p-6 text-white transition-transform hover:-translate-y-1 md:w-52 md:h-72 xl:w-64 xl:h-80 border border-[#1E1E1E]">
+     
+      {/* Header dengan gambar dan judul */}
+      <div className="flex items-center mb-8">
+        <div className="relative h-12 w-12 flex-shrink-0 rounded-full bg-white">
+          <Image
+            src={imageUrl || '/placeholder-logo.png'}
+            alt={`${company} logo`}
+            fill
+            className="rounded-full object-contain p-1"
+          />
+        </div>
         <div className="ml-4">
-          <p className="mt-4 text-xs">{company}</p>
-          <h3 className="text-[#FFE16B] font-semibold leading-tight">{title}</h3>
+          <p className="text-sm text-gray-200">{company}</p>
+          <h3 className="font-semibold text-[#FFE16B] text-base leading-tight">{title}</h3>
         </div>
       </div>
 
-      <div className="mt-auto space-y-1 text-xs">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1">
-            <img src="/location.png" alt="location icon" className="h-3 w-3" />
-            {location}
+      {/* Konten tengah - Detail pekerjaan */}
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="space-y-3 text-sm">
+          <div className="flex items-center gap-2">
+            <img src="/location.png" alt="location icon" className="h-4 w-4" />
+            <span>{location}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <img src="/time.png" alt="time icon" className="h-3 w-3" />
-            {time}
+          <div className="flex items-center gap-2">
+            <img src="/time.png" alt="time icon" className="h-4 w-4" />
+            <span>{time}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <img src="/money.png" alt="money icon" className="h-3 w-3" />
-            <p>Mulai dari {salary}</p>
+          <div className="flex items-center gap-2">
+            <img src="/money.png" alt="money icon" className="h-4 w-4" />
+            <span>Mulai dari {salary}</span>
           </div>
         </div>
       </div>
-      <div className="flex flex-col mt-auto justify-items-center items-center">
-        <button
-          onClick={() => alert(`Lamaran untuk ${title}`)}
-          className="mt-auto rounded-md bg-[#B3EBCE] py-1 text-center text-xs font-semibold text-gray-900 hover:bg-emerald-300/50 w-36">
+      
+      {/* Tombol Lamar */}
+      <div className="flex justify-center mt-6">
+        <Button bgColor="#B3EBCE" width="60%" fontSize="text-sm">
           Lamar
-        </button>
+        </Button>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -8,6 +8,7 @@ import {
   timestamp,
   boolean,
   char,
+  json,
 } from 'drizzle-orm/pg-core';
 
 // Users
@@ -150,12 +151,15 @@ export const feedback = pgTable('feedback', {
 // Jobs
 export const jobs = pgTable('job', {
   id: serial('id').primaryKey(),
-  title: varchar('title', { length: 255 }),
-  field: varchar('field', { length: 255 }),
-  company: varchar('company', { length: 255 }),
-  description: text('description'),
-  location: varchar('location', { length: 255 }),
   imageUrl: varchar('image_url', { length: 255 }),
+  company: varchar('company', { length: 255 }),
+  title: varchar('title', { length: 255 }),
+  location: varchar('location', { length: 255 }),
+  time: varchar('time', { length: 255 }),
+  salary: varchar('salary', { length: 255 }),
+  description: text('description'),
+  tasks: json('tasks').$type<string[]>(),
+  requirements: json('requirements').$type<string[]>(),
 });
 
 // Applicants
