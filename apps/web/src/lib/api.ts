@@ -86,3 +86,26 @@ export async function getSupervisors(): Promise<Supervisor[]> {
   return res.json();
 }
 
+/* ASSIGN SUPERVISOR */
+export async function assignSupervisor(userId: number, supervisorId: number) {
+  console.log('DEBUG: Requesting API Assigning Supervisor Request for ', userId, supervisorId);
+  try {
+    const response = await fetch(`${BASE_URL}/supervisors/assign`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, supervisorId }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Gagal menyimpan supervisor');
+    }
+
+    return await response.json(); // { success: true }
+  } catch (error) {
+    console.error('Error saat assign supervisor:', error);
+    throw error;
+  }
+}

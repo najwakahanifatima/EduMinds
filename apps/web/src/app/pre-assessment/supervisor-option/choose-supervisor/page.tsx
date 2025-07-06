@@ -80,7 +80,11 @@ const SupervisorSelectionPage = () => {
 
   const handleConfirmSelection = () => {
     if (selectedSupervisorId) {
-      Router.push(`/pre-assessment/supervisor-option/choose-supervisor/proceed-supervisor?id=${selectedSupervisorId}`);
+      const selected = supervisors.find(s => s.id === selectedSupervisorId);
+      if (selected) {
+        localStorage.setItem('selectedSupervisor', JSON.stringify(selected));
+        Router.push(`/pre-assessment/supervisor-option/choose-supervisor/proceed-supervisor`);
+      }
     }
   };
 

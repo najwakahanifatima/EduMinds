@@ -30,7 +30,7 @@ const SignUp = () => {
     const tanggal = searchParams.get('tanggal') || '';
 
     try {
-      await registerUser({
+      const data = await registerUser({
         name: nama,
         email: email,
         password: kataSandi,
@@ -38,6 +38,8 @@ const SignUp = () => {
       });
 
       setProgressWidth(100);
+      localStorage.setItem('id_user', data.id);
+      console.log('DEBUG IN FE: register user', data);
 
       const params = new URLSearchParams({
         nama,

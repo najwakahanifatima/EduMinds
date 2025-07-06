@@ -20,8 +20,9 @@ const Login = () => {
     }
 
     try {
-      const { access_token } = await loginRequest(role, alamatEmail, kataSandi);
+      const { access_token, id_user } = await loginRequest(role, alamatEmail, kataSandi);
       localStorage.setItem('token', access_token);
+      localStorage.setItem('id_user', id_user);
 
       if (role === 'user') {
         Router.push('/user-dashboard');

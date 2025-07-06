@@ -1,5 +1,5 @@
 import { db } from 'src/db/client';
-import { supervisors } from 'src/db/schema';
+import { supervisors, supervising } from 'src/db/schema';
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
@@ -16,4 +16,12 @@ export class SupervisorService {
       })
       .from(supervisors);
   }
+
+  async assignSupervisor(userId: number, supervisorId: number) {
+    return db.insert(supervising).values({
+      userId,
+      supervisorId,
+    });
+  }
+
 }
