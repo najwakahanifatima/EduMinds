@@ -96,7 +96,7 @@ export default function Navbar() {
             <p className="text-sm font-medium text-indigo-700">Grace Doe</p>
           </div>
 
-          <button onClick={() => router.push("/profile")}>
+          <button onClick={() => router.push("/supervisor-profile")}>
             <img
               src="/dummy-profile.png"
               alt="profile"
