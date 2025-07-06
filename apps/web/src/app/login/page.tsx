@@ -29,7 +29,7 @@ const Login = () => {
     }
     setShowError(false);
     console.log('Masuk sebagai supervisor diklik');
-    Router.push('/supervisor-dashboard');
+    Router.push('/supervisor');
   };
 
   return (
