@@ -71,9 +71,22 @@ apps/
 ### 🔧 Backend (NestJS & FastAPI)
 
 ```bash
+pip install fastapi "uvicorn[standard]"
+pip install joblib
+npm install drizzle-orm
+npm install pg
+npm install dotenv
+npm install numpy
+npm install scikit-learn
 npm install @supabase/ssr
 npm install @google/generative-ai
 npm install @nestjs/jwt
+```
+
+### 🖥️ Frontend (Next.js + Tailwind)
+
+```bash
+npm install @heroicons/react
 ```
 
 
