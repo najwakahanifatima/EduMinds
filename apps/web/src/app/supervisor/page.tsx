@@ -87,7 +87,9 @@ export default function SupervisorDashboard() {
           </div>
 
           <div className="mt-4 flex justify-end">
-            <button className="text-xs font-semibold text-indigo-600 underline hover:opacity-80">
+            <button 
+            onClick={() => router.push("/students")}
+            className="text-xs font-semibold text-indigo-600 underline hover:opacity-80">
               Lihat lebih banyak →
             </button>
           </div>
