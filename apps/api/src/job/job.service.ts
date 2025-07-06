@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { and, eq, like, SQL } from 'drizzle-orm';
+import { and, eq, ilike, SQL } from 'drizzle-orm';
 import { db } from 'src/db/client';
 import { jobs } from 'src/db/schema';
 
@@ -9,7 +9,7 @@ export class JobService {
     const conditions: SQL[] = [];
     
     if (title) {
-      conditions.push(like(jobs.title, `%${title}%`));
+      conditions.push(ilike(jobs.title, `%${title}%`));
     }
     
     if (location && location !== 'Semua Lokasi') {
