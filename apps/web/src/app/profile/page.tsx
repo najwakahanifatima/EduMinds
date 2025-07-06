@@ -28,8 +28,9 @@ export default function StudentProfile() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <main className="mx-auto w-full max-w-4xl px-6 py-10">
+      <main className="mx-auto w-full max-w-4xl px-6 py-10 items-center">
         <HeaderSection />
+        <h1 className="mb-8 text-center text-xl font-semibold">{student.name}</h1>
         <TabBar tab={tab} setTab={setTab} />
 
         <div className="mx-auto max-w-xl">
@@ -44,7 +45,7 @@ export default function StudentProfile() {
 
 function HeaderSection() {
   return (
-    <div className="relative mb-26">
+    <div className="relative mb-24">
         <div className="h-48 w-full overflow-hidden rounded-3xl bg-[#3D3FA0] border-2 border-[#1E1E1E]">
         <img src="/landing-page-bg.png" alt="" className="h-full w-full object-cover" />
         </div>
@@ -179,6 +180,7 @@ function CareerCard({
 }: {
   title: string;
   progress: number;
+  image:string;
   variant: "primary" | "secondary";
 }) {
   const bg = variant === "primary" ? "bg-[#FFEEAB]/75" : "bg-[#B3EBCE]/50";
