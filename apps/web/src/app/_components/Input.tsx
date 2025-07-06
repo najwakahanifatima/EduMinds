@@ -1,11 +1,11 @@
 import React from 'react';
 
 type InputProps = {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'date';
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'date' | 'textarea';
   placeholder?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   required?: boolean;
   width?: string;
   height?: string;
@@ -27,6 +27,10 @@ export default function Input({
   label,
   icon,
 }: InputProps) {
+  const baseClasses = `w-full px-4 ${icon ? 'pr-10' : ''} bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
+    hasError ? 'border-red-500' : 'border-gray-400'
+  }`;
+
   return (
     <div className={`relative ${width}`}>
       {label && (
@@ -39,17 +43,27 @@ export default function Input({
           {icon}
         </div>
       )}
-      <input
-        type={type}
-        value={value}
-        required={required}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        placeholder={placeholder}
-        className={`w-full px-4 ${icon ? 'pr-10' : ''} ${height} bg-[#e9e9ff] border rounded-lg focus:ring-2 focus:ring-[#7476e7] focus:border-transparent outline-none transition-all ${
-          hasError ? 'border-red-500' : 'border-gray-400'
-        }`}
-      />
+      {type === 'textarea' ? (
+        <textarea
+          value={value}
+          required={required}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          rows={8}
+          className={`${baseClasses} py-3 resize-none`}
+        />
+      ) : (
+        <input
+          type={type}
+          value={value}
+          required={required}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          className={`${baseClasses} ${height}`}
+        />
+      )}
     </div>
   );
 }
