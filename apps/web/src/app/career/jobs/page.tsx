@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/app/_components/Navbar";
 import Button from "@/app/_components/Button";
 
-/* —— dummy data (ganti fetch API, sesuaiin idnya) —— */
 const job = {
   title: "Barista",
   company: "PT Keren",

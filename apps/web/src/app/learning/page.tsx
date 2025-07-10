@@ -1,4 +1,3 @@
-/* app/learning/page.tsx */
 "use client";
 
 import React from "react";
@@ -20,10 +19,8 @@ export default function LearningPage() {
     <>
       <Navbar />
       <main className="mx-auto w-full px-4 md:px-8 py-6">
-        {/* kartu ringkasan progres */}
         <section className="mt-12 mb-8 rounded-2xl border-2 border-black bg-[#D5D6FF] p-6 max-w-xl lg:max-w-2xl mx-auto">
           <div className="flex items-center gap-4">
-            {/* icon */}
             <img
               src="./floris.png"
               alt="bouquet"

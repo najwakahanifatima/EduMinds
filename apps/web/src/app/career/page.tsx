@@ -43,14 +43,12 @@ export default function CareerPage() {
       <Navbar />
 
       <main className="px:10 md:px-20 lg:px-40 w-full overflow-hidden">
-        {/* HERO */}
         <section className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
             <h1 className="text-4xl font-semibold leading-tight text-gray-900">
               Cari Pekerjaan <br /> Impianmu!
             </h1>
 
-            {/* search */}
             <div className="relative mt-8 max-w-xs">
               <input
                 type="text"
@@ -67,7 +65,6 @@ export default function CareerPage() {
           />
         </section>
 
-        {/* REKOMENDASI UTAMA */}
         <section className="mt-10">
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="text-xl font-semibold text-gray-900">
@@ -89,7 +86,6 @@ export default function CareerPage() {
           </div>
         </section>
 
-        {/* CAROUSEL JOB LAIN */}
         <section className="mt-16">
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="text-xl font-semibold text-gray-900">

@@ -22,14 +22,12 @@ export default function Navbar() {
       : "button-navbar-off";
   };
   
-  /* ── state dropdown ─────────────────────────── */
   const [openCareer, setOpenCareer] = useState(false);
   const [openPendamping, setOpenPendamping] = useState(false);
 
   const careerRef = useRef<HTMLDivElement>(null);
   const pendampingRef = useRef<HTMLDivElement>(null);
 
-  /* ── close dropdown if click outside ────────── */
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (
@@ -57,7 +55,7 @@ export default function Navbar() {
             <img src="/logo-cropped.png" alt="EduMinds" className="h-4 w-auto scale-[1.05] sm:h-5 sm:scale-[1.15] md:h-6 md:scale-100 lg:h-7 origin-left"/>
           </button>
 
-          <button onClick={() => router.push("/supervisor")} className={`${activeNav("/supervisor")} hidden md:inline`}>
+          <button onClick={() => router.push("/supervisor")} className={`${activeNav("/supervisor")} inline`}>
             Beranda
           </button>
 
@@ -78,7 +76,6 @@ export default function Navbar() {
           
         </div>
 
-        {/* ──────── RIGHT SECTION ───────────────────── */}
         <div className="flex flex-row items-center gap-1 sm:gap-2 md:gap-3 lg:gap-4">
           <button onClick={() => router.push("/chat")} className="p-2 hover:text-indigo-600">
             <img src="/chat.png" alt="Chat" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />

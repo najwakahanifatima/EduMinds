@@ -18,7 +18,6 @@ export default function JobCard({ imageUrl, company, title, location, time, sala
   return (
     <Link href={path} className="flex w-48 h-64 flex-col rounded-lg bg-[#5254A8] p-6 text-white transition-transform hover:-translate-y-1 md:w-52 md:h-72 xl:w-64 xl:h-80 border border-[#1E1E1E]">
      
-      {/* Header dengan gambar dan judul */}
       <div className="flex items-center mb-8">
         <div className="relative h-12 w-12 flex-shrink-0 rounded-full bg-white">
           <Image
@@ -34,7 +33,6 @@ export default function JobCard({ imageUrl, company, title, location, time, sala
         </div>
       </div>
 
-      {/* Konten tengah - Detail pekerjaan */}
       <div className="flex-1 flex flex-col justify-center">
         <div className="space-y-3 text-sm">
           <div className="flex items-center gap-2">
@@ -52,7 +50,6 @@ export default function JobCard({ imageUrl, company, title, location, time, sala
         </div>
       </div>
       
-      {/* Tombol Lamar */}
       <div className="flex justify-center mt-6">
         <Button bgColor="#B3EBCE" width="60%" fontSize="text-sm">
           Lamar

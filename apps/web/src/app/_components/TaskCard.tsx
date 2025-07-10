@@ -1,5 +1,5 @@
-/* app/_components/TaskCard.tsx */
 "use client";
+import { useRouter } from "next/navigation";
 
 export type Task = {
   id: number;
@@ -10,7 +10,7 @@ export type Task = {
 };
 
 export default function TaskCard({ task }: { task: Task }) {
-  // warna kartu & border kiri
+  const router = useRouter();
   let bg = "bg-[#E4F0FF]";
   let bd = "border-[#4D8AC7]";
   if (task.score >= 80) {
@@ -36,7 +36,6 @@ export default function TaskCard({ task }: { task: Task }) {
         </span>
       )}
 
-      {/* header baris */}
       <div className="flex items-start justify-between mt-4">
         <div className="flex items-start gap-4">
           <img src="/communication.png" className="h-10 w-10" />
@@ -61,7 +60,9 @@ export default function TaskCard({ task }: { task: Task }) {
         </div>
       </div>
 
-      <button className="mt-4 block w-full rounded-lg bg-[#374394] py-2 text-xs font-semibold text-white shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] hover:text-gray-200">
+      <button 
+      onClick={() => {router.push(`/students/task-detail/task1`)}}
+      className="mt-4 block w-full rounded-lg bg-[#374394] py-2 text-xs font-semibold text-white shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] hover:text-gray-200">
         Lihat Detail Jawaban
       </button>
     </div>

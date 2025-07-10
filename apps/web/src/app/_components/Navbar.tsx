@@ -22,14 +22,12 @@ export default function Navbar() {
       : "button-navbar-off";
   };
   
-  /* ── state dropdown ─────────────────────────── */
   const [openCareer, setOpenCareer] = useState(false);
   const [openPendamping, setOpenPendamping] = useState(false);
 
   const careerRef = useRef<HTMLDivElement>(null);
   const pendampingRef = useRef<HTMLDivElement>(null);
 
-  /* ── close dropdown if click outside ────────── */
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (
