@@ -55,14 +55,14 @@ export default function LessonReadingPage() {
 
         <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <button
-            onClick={() => router.push("/lesson/")}
+            onClick={() => router.push("/learning/")}
             className="text-sm font-semibold text-[#1A1C7B] underline hover:scale-105"
           >
             Ganti metode belajar
           </button>
 
           <button
-            onClick={() => router.push("/lesson/" + (id + 1))}
+            onClick={() => router.push("/learning")}
             className="self-end rounded-md bg-[#EDCD50] px-8 py-2 text-sm font-semibold
                        text-gray-900 shadow-2xl hover:scale-105 border border-[#1E1E1E]"
           >

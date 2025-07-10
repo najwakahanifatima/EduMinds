@@ -37,8 +37,8 @@ export default function LessonVideoPage() {
             </button>
 
             <button
-                onClick={() => router.push(`/learning/lesson/${currentId + 1}`)}
-                className="rounded-md bg-[#EDCD50] px-6 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-yellow-500/80"
+                onClick={() => router.push(`/learning`)}
+                className="rounded-md bg-[#EDCD50] px-6 py-2 text-sm font-semibold text-gray-900 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] border border-[#1E1E1E] hover:scale-105"
             >
                 Lanjutkan
             </button>
@@ -47,5 +47,3 @@ export default function LessonVideoPage() {
     </>
   );
 }
-
-//todo: fix routing to next lesson
