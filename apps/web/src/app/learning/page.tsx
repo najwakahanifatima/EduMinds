@@ -22,7 +22,7 @@ export default function LearningPage() {
         <section className="mt-12 mb-8 rounded-2xl border-2 border-black bg-[#D5D6FF] p-6 max-w-xl lg:max-w-2xl mx-auto">
           <div className="flex items-center gap-4">
             <img
-              src="./floris.png"
+              src="./Florist.png"
               alt="bouquet"
               className="h-10 w-10"
             />

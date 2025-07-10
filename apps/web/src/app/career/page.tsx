@@ -17,15 +17,15 @@ export default function CareerPage() {
   const otherCareer = [
     { 
         name: 'Barista', 
-        icon: '/barista.png'
+        icon: '/Barista.png'
     },
     { 
         name: 'Floris',
-        icon: '/floris.png'
+        icon: '/Florist.png'
     },
     { 
         name: 'Koki',
-        icon: '/koki.png'
+        icon: '/Koki.png'
      },
   ];
 
