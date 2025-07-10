@@ -26,7 +26,7 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <div
       className={`
-        relative rounded-2xl p-6 shadow
+        relative rounded-2xl p-6
         border-2 border-l-[10px] ${bd} ${bg}
       `}
     >
@@ -61,7 +61,7 @@ export default function TaskCard({ task }: { task: Task }) {
         </div>
       </div>
 
-      <button className="mt-4 block w-full rounded-lg bg-[#374394] py-2 text-xs font-semibold text-white">
+      <button className="mt-4 block w-full rounded-lg bg-[#374394] py-2 text-xs font-semibold text-white shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] hover:text-gray-200">
         Lihat Detail Jawaban
       </button>
     </div>

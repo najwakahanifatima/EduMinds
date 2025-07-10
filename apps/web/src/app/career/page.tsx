@@ -1,4 +1,3 @@
-/* app/career/page.tsx */
 "use client";
 import React from "react";
 import Navbar from "@/app/_components/Navbar";
@@ -10,9 +9,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 export default function CareerPage() {
   const router = useRouter();
   const recommended = [
-    { company: "PT Keren", title: "Pengrajin Bunga", location: "Bandung", time: "3 Bulan", salary: "Rp 5.000.000", path: "#" },
-    { company: "PT Keren", title: "Penata Tanaman", location: "Bekasi", time: "6 Bulan", salary: "Rp 5.000.000", path: "#" },
-    { company: "PT Keren", title: "Pengisi Acara", location: "Bandung", time: "6 Bulan", salary: "Rp 5.000.000", path: "#" },
+    { company: "PT Keren", title: "Pengrajin Bunga", location: "Bandung", time: "3 Bulan", salary: "Rp 5.000.000", path: "#"},
+    { imageUrl:"/job.png", company: "PT Keren", title: "Penata Tanaman", location: "Bekasi", time: "6 Bulan", salary: "Rp 5.000.000", path: "#"},
+    { imageUrl:"/kasir.png", company: "PT Keren", title: "Pengisi Acara", location: "Bandung", time: "6 Bulan", salary: "Rp 5.000.000", path: "#"},
   ];
 
   const otherCareer = [

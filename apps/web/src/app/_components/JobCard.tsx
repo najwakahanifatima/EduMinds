@@ -22,7 +22,7 @@ export default function JobCard({ imageUrl, company, title, location, time, sala
       <div className="flex items-center mb-8">
         <div className="relative h-12 w-12 flex-shrink-0 rounded-full bg-white">
           <Image
-            src={imageUrl || '/placeholder-logo.png'}
+            src={imageUrl || '/job.png'}
             alt={`${company} logo`}
             fill
             className="rounded-full object-contain p-1"
