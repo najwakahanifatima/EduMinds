@@ -9,7 +9,6 @@ type Thread = {
     id: string;
     name: string;
     avatar: string;
-    snippet: string;
     isCompanion?: boolean;
 };
 
@@ -18,13 +17,11 @@ const threads: Thread[] = [
         id: "bot",
         name: "EduBot",
         avatar: "/edubot.png",
-        snippet: "Lorem ipsum dolor...",
     },
     {
         id: "jane",
         name: "Jane",
         avatar: "/pendamping.png",
-        snippet: "Kamu maunya jam be...",
         isCompanion: true,
     },
 ];
@@ -63,10 +60,25 @@ export default function ChatPage() {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    // Auto scroll ketika messages berubah
     useEffect(() => {
         scrollToBottom();
     }, [messages, active.id]);
+
+    const getThreadSnippet = (threadId: string): string => {
+        const threadMessages = messages[threadId];
+        if (!threadMessages || threadMessages.length === 0) {
+            return "Belum ada pesan";
+        }
+        
+        const lastMessage = threadMessages[threadMessages.length - 1];
+        const maxLength = 20;
+        
+        if (lastMessage.text.length > maxLength) {
+            return lastMessage.text.substring(0, maxLength) + "...";
+        }
+        
+        return lastMessage.text;
+    };
 
     const send = async () => {
         if (!input.trim()) return;
@@ -156,7 +168,7 @@ export default function ChatPage() {
                                     <span className="rounded-full bg-[#EDCD50] px-2 text-[10px] text-gray-700">Pendamping</span>
                                 )}
                                 </div>
-                                <p className="text-xs text-gray-500 truncate">{t.snippet}</p>
+                                <p className="text-xs text-gray-500 truncate">{getThreadSnippet(t.id)}</p>
                             </div>
                             </div>
                         </li>
