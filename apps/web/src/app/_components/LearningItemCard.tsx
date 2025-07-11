@@ -32,7 +32,6 @@ export default function LearningItemCard({
     const iconSrc =
         type === "lesson" ? "/pelajaran.png" : "/tugas.png";
 
-    /* label & handler utama */
     let primaryLabel = "";
     let primaryHandler: (() => void) | undefined;
 
@@ -40,7 +39,6 @@ export default function LearningItemCard({
         primaryLabel = completed ? "Pelajari Kembali" : "Pelajari";
         primaryHandler = completed ? onReview : onStart;
     } else {
-        /* task */
         primaryLabel = completed ? "Lihat Hasil" : "Kerjakan";
         primaryHandler = completed ? onResult : onStart;
     }
@@ -55,7 +53,6 @@ export default function LearningItemCard({
             
         `}
         >
-        {/* header */}
         <div className="flex items-start justify-between">
             <div className="flex gap-3">
             <Image src={iconSrc} alt="" width={32} height={32} />

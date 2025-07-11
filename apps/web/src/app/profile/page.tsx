@@ -9,13 +9,13 @@ const student = {
   email: "gracedoe@email.com",
   birth: "05/07/03",
 };
-const careerMain = { title: "Floris", progress: 36, image:"/floris.png" };
+const careerMain = { title: "Floris", progress: 36, image:"/Florist.png" };
 const careerOthers = [
   { title: "Barista", progress: 23, image:"/barista.png" },
   { title: "Koki", progress: 15, image:"/koki.png" },
 ];
 const certificates = [
-  { title: "Sertifikat Floris", img: "/diploma.png", badge: "/floris.png" },
+  { title: "Sertifikat Floris", img: "/diploma.png", badge: "/Florist.png" },
   { title: "Sertifikat Barista", img: "/diploma.png", badge: "/barista.png" },
   { title: "Sertifikat Koki", img: "/diploma.png", badge: "/koki.png" },
 ];
@@ -100,10 +100,10 @@ function DataTab() {
       <Field label="Tanggal Lahir" value={student.birth} />
 
       <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:justify-between">
-        <button className="w-full rounded-lg border border-[#1E1E1E] bg-[#EDCD50] py-2 text-sm font-semibold hover:scale-105 sm:w-48">
+        <button className="w-full rounded-lg border border-[#1E1E1E] bg-[#EDCD50] py-2 text-sm font-semibold hover:scale-105 sm:w-48 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]">
           Ubah Data Diri
         </button>
-        <button className="w-full rounded-lg border border-[#1E1E1E] bg-[#EDCD50] py-2 text-sm font-semibold hover:scale-105 sm:w-48">
+        <button className="w-full rounded-lg border border-[#1E1E1E] bg-[#EDCD50] py-2 text-sm font-semibold hover:scale-105 sm:w-48 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]">
           Ubah Kata Sandi
         </button>
       </div>
@@ -125,7 +125,7 @@ function CareerTab() {
         ))}
       </div>
 
-      <button className="mx-auto mt-6 block rounded-lg border border-[#1E1E1E] bg-[#EDCD50] px-10 py-2 text-sm font-semibold hover:scale-105">
+      <button className="shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] mx-auto mt-6 block rounded-lg border border-[#1E1E1E] bg-[#EDCD50] px-10 py-2 text-sm font-semibold hover:scale-105">
         Ganti Karir
       </button>
     </div>
@@ -142,7 +142,7 @@ function CertTab() {
             <img src={c.badge} className="absolute -right-2 -top-2 h-9 w-9" />
           </div>
           <p className="text-sm font-semibold">{c.title}</p>
-          <button className="rounded-md border border-[#1E1E1E] bg-[#EDCD50] px-8 py-1 text-xs hover:scale-105">
+          <button className="shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] rounded-md border border-[#1E1E1E] bg-[#EDCD50] px-8 py-1 text-xs hover:scale-105">
             Lihat
           </button>
         </div>

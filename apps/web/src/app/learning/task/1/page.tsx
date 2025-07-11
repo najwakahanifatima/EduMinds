@@ -50,7 +50,7 @@ export default function TaskPage() {
             onClick={() => alert("Jawaban dikumpulkan!")}
             className="
               self-end rounded-md bg-[#EDCD50] px-8 py-2 text-sm font-semibold
-              text-gray-900 shadow border border-[#1E1E1E]
+              text-gray-900 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)] border border-[#1E1E1E]
               hover:scale-105
             "
           >

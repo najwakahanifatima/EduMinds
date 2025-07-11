@@ -36,8 +36,8 @@ export default function TaskListPage() {
           <div className="flex-1 ml-4">
             <h1 className="text-2xl font-semibold">{student.name}</h1>
             <button
-              onClick={() => router.push(`/supervisor/perkembangan`)}
-              className="mt-4 block w-180 rounded-md bg-[#B3EBCE] py-1 text-sm text-[#1E1E1E] font-medium border-[#1E1E1E] border hover:bg-emerald-300"
+              onClick={() => router.push(`/students/progress`)}
+              className="mt-4 w-full rounded-md bg-[#B3EBCE] py-1 text-sm text-[#1E1E1E] font-medium border-[#1E1E1E] border hover:bg-emerald-300 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]"
             >
               Lihat Perkembangan
               <img src="/progress.png" className="ml-1 inline h-4 w-4" />
@@ -53,16 +53,16 @@ export default function TaskListPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Cari tugas…"
-              className="w-80 rounded-xl border bg-[#DCDDFF] py-1.5 pl-4 pr-9 text-sm outline-none"
+              className="w-80 rounded-xl border bg-[#DCDDFF] py-1.5 pl-4 pr-9 text-sm outline-none shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]"
             />
             <MagnifyingGlassIcon className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-600" />
           </div>
-          <button className="flex items-center gap-1 rounded-md border bg-[#EDCD50] px-3 py-1 text-xs font-semibold">
+          <button className="flex items-center gap-1 rounded-md border bg-[#EDCD50] px-3 py-1 text-xs font-semibold shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]">
             <img src="/filter.png" className="h-4 w-4" />
             Filter
           </button>
 
-          <button className="flex items-center gap-1 rounded-md border bg-[#EDCD50] px-3 py-1 text-xs font-semibold">
+          <button className="flex items-center gap-1 rounded-md border bg-[#EDCD50] px-3 py-1 text-xs font-semibold shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]">
             <ArrowsUpDownIcon className="h-4 w-4" />
             Urutkan
           </button>

@@ -22,17 +22,17 @@ export default function Navbar() {
       : "button-navbar-off";
   };
   
-  /* ── state dropdown ─────────────────────────── */
   const [openCareer, setOpenCareer] = useState(false);
   const [openPendamping, setOpenPendamping] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
 
   const careerRef = useRef<HTMLDivElement>(null);
   const pendampingRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const [userName, setUserName] = useState('');
   const [careerPath, setCareerPath] = useState('');
 
-  /* ── close dropdown if click outside ────────── */
   useEffect(() => {
     const storedName = localStorage.getItem("user_name");
     if (storedName) {
@@ -54,6 +54,12 @@ export default function Navbar() {
         !pendampingRef.current.contains(e.target as Node)
       ) {
         setOpenPendamping(false);
+      }
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setOpenProfile(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -165,13 +171,39 @@ export default function Navbar() {
             <p className="text-sm font-medium text-indigo-700">{userName || "Pengguna"}</p>
           </div>
 
-          <button onClick={() => router.push("/profile")}>
-            <img
-              src="/dummy-profile.png"
-              alt="profile"
-              className="h-8 w-8 rounded-full bg-green-200 object-cover"
-            />
-          </button>
+          <div ref={profileRef} className="relative">
+            <button onClick={() => setOpenProfile((s) => !s)}>
+              <img
+                src="/dummy-profile.png"
+                alt="profile"
+                className="h-8 w-8 rounded-full bg-green-200 object-cover"
+              />
+            </button>
+
+            {openProfile && (
+              <div className="absolute right-0 mt-2 w-36 overflow-hidden rounded-xl border border-gray-800 bg-white shadow-lg">
+                <button
+                  onClick={() => {
+                    router.push("/profile");
+                    setOpenProfile(false);
+                  }}
+                  className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
+                >
+                  Lihat Profil
+                </button>
+                <button
+                  onClick={() => {
+                    // LOGOUT
+                    router.push("/");
+                    setOpenProfile(false);
+                  }}
+                  className="block w-full px-4 py-2 text-left text-sm text-black hover:bg-[#EDCD50]/65"
+                >
+                  Keluar Akun
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -31,15 +31,15 @@ export default function StudentCard({ stu }: { stu: Student }) {
 
       <div className="flex w-48 flex-col gap-2">
         <button
-          onClick={() => router.push(`/supervisor/perkembangan`)}
-          className="rounded-lg bg-[#374394] border border-[#1E1E1E] py-1 text-xs font-medium text-white hover:scale-105"
+          onClick={() => router.push(`/students/progress`)}
+          className="rounded-lg bg-[#374394] border border-[#1E1E1E] py-1 text-xs font-medium text-white hover:scale-105 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]"
         >
           Lihat Perkembangan
         </button>
 
         <button
-          onClick={() => router.push(`/supervisor/task-detail`)}
-          className="rounded-lg bg-[#BFC1FF] border border-[#1E1E1E] py-1 text-xs font-medium text-[#1E1E1E] hover:scale-105"
+          onClick={() => router.push(`/students/task-detail`)}
+          className="rounded-lg bg-[#BFC1FF] border border-[#1E1E1E] py-1 text-xs font-medium text-[#1E1E1E] hover:scale-105 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]"
         >
           Lihat Detail Tugas
         </button>

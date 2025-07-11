@@ -66,7 +66,6 @@ export default function SupervisorDashboard() {
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-xl font-semibold">Daftar Pelajar</h2>
 
-            {/* search bar */}
             <div className="relative">
               <input
                 value={query}

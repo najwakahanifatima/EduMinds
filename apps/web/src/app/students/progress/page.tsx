@@ -106,8 +106,8 @@ export default function StudentProgressPage() {
           <div className="flex-1 ml-4">
             <h1 className="text-2xl font-semibold">{student.name}</h1>
             <button
-              onClick={() => router.push(`/supervisor/task-detail`)}
-              className="mt-4 block w-120 rounded-md bg-[#B3EBCE] py-1 text-sm text-gray-900 font-medium border-[#1E1E1E] border hover:bg-emerald-400"
+              onClick={() => router.push(`/students/task-detail`)}
+              className="mt-4 block w-full rounded-md bg-[#B3EBCE] py-1 text-sm text-gray-900 font-medium border-[#1E1E1E] border hover:bg-emerald-400 shadow-[0.5px_1.5px_0_rgba(30,30,30,1)]"
             >
               Lihat Detail Tugas 
               <img src="/assignment.png" className="ml-1 inline h-4 w-4" />

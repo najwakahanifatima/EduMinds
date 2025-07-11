@@ -1,4 +1,3 @@
-/* app/career/page.tsx */
 "use client";
 import React from "react";
 import Navbar from "@/app/_components/Navbar";
@@ -10,9 +9,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 export default function CareerPage() {
   const router = useRouter();
   const recommended = [
-    { company: "PT Keren", title: "Pengrajin Bunga", location: "Bandung", time: "3 Bulan", salary: "Rp 5.000.000", path: "#" },
-    { company: "PT Keren", title: "Penata Tanaman", location: "Bekasi", time: "6 Bulan", salary: "Rp 5.000.000", path: "#" },
-    { company: "PT Keren", title: "Pengisi Acara", location: "Bandung", time: "6 Bulan", salary: "Rp 5.000.000", path: "#" },
+    { company: "PT Keren", title: "Pengrajin Bunga", location: "Bandung", time: "3 Bulan", salary: "Rp 5.000.000", path: "#"},
+    { imageUrl:"/job.png", company: "PT Keren", title: "Penata Tanaman", location: "Bekasi", time: "6 Bulan", salary: "Rp 5.000.000", path: "#"},
+    { imageUrl:"/kasir.png", company: "PT Keren", title: "Pengisi Acara", location: "Bandung", time: "6 Bulan", salary: "Rp 5.000.000", path: "#"},
   ];
 
   const otherCareer = [
@@ -44,14 +43,12 @@ export default function CareerPage() {
       <Navbar />
 
       <main className="px:10 md:px-20 lg:px-40 w-full overflow-hidden">
-        {/* HERO */}
         <section className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
             <h1 className="text-4xl font-semibold leading-tight text-gray-900">
               Cari Pekerjaan <br /> Impianmu!
             </h1>
 
-            {/* search */}
             <div className="relative mt-8 max-w-xs">
               <input
                 type="text"
@@ -68,7 +65,6 @@ export default function CareerPage() {
           />
         </section>
 
-        {/* REKOMENDASI UTAMA */}
         <section className="mt-10">
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="text-xl font-semibold text-gray-900">
@@ -90,7 +86,6 @@ export default function CareerPage() {
           </div>
         </section>
 
-        {/* CAROUSEL JOB LAIN */}
         <section className="mt-16">
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="text-xl font-semibold text-gray-900">
