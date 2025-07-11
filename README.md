@@ -1,6 +1,7 @@
-# 🧠 EduMinds
 
-![logo](https://github.com/user-attachments/assets/d18d4337-392f-43f6-8def-a0e87c06a671)
+<img width="1383" height="456" alt="Frame 18 (1)" src="https://github.com/user-attachments/assets/4e5c6312-a8c2-4d94-8382-d3ae9fbd7c29" />
+
+## 📚 Deskripsi Aplikasi
 EduMinds adalah platform pembelajaran berbasis AI yang dirancang untuk meningkatkan partisipasi kerja penyandang disabilitas intelektual. Dengan pra-asesmen potensi, jalur belajar adaptif, dan sistem sertifikasi resmi, EduMinds membantu menciptakan tenaga kerja terampil yang siap diserap industri.
 
 ## 🎯 Visi & Dampak
