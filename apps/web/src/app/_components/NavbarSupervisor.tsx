@@ -78,7 +78,7 @@ export default function Navbar() {
           </button>
         </div>
         <div className="flex flex-row items-center gap-1 sm:gap-2 md:gap-3 lg:gap-4">
-          <button onClick={() => router.push("/chat")} className="p-2 hover:text-indigo-600">
+          <button onClick={() => router.push("/chat/supervisor")} className="p-2 hover:text-indigo-600">
             <img src="/chat.png" alt="Chat" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
           </button>
           <button
