@@ -1,26 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "../_components/Navbar";
 import LearningItemCard from "../_components/LearningItemCard";
 import Button from "../_components/Button";
 
-const Image = ({ src, alt, width, height, className }: { src: string; alt: string; width: number; height: number; className?: string }) => (
-  <img 
-    src={src} 
-    alt={alt} 
-    width={width} 
-    height={height} 
-    className={className}
-    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-        const target = e.target as HTMLImageElement;
-        target.onerror = null;
-        // Simple placeholder for broken images
-        target.src = `https://placehold.co/${width}x${height}/CCCCCC/FFFFFF?text=Img`;
-    }}
-  />
-);
-
 export default function LearningPage() {
+  const router = useRouter();
   const progress = 0.23;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSpeed, setSelectedSpeed] = useState("Normal");
@@ -59,10 +45,10 @@ export default function LearningPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       <Navbar />
-      <main className="mx-auto w-full px-4 md:px-8 py-6">border-[#1E1E1E]
+      <main className="mx-auto w-full px-4 md:px-8 py-6">
         <section className="mt-12 mb-8 rounded-2xl border-2  bg-[#D5D6FF] p-6 max-w-xl lg:max-w-2xl mx-auto">
           <div className="flex items-center gap-4">
-            <Image
+            <img
               src="./Florist.png"
               alt="bouquet"
               width={40}
@@ -136,7 +122,7 @@ export default function LearningPage() {
             idx={0}
             type="task"
             title="Ujian Sertifikasi"
-            onStart={() => console.log("Mulai Ujian Sertifikasi")}
+            onStart={() => router.push("/pre-assessment/question")}
             overrideLabel="Ujian"
             overrideClassName="border-[#1E1E1E] bg-[#EDD57A]"
           />
