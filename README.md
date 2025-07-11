@@ -101,14 +101,12 @@ uvicorn api:app --reload --port 5000
 ### Backend API
 ```bash
 cd apps/api
-npm install
 npm run start
 ```
 
 ### Frontend
 ```bash
 cd apps/web
-npm install
 npm run dev
 ```
 
